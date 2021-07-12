@@ -8,6 +8,10 @@ Use the functions inside of the helper_functions in order to clean or preprocess
 ## Libraries:
 Include and any all libraries used in the project below this to ensure the user has it in their environment
 
+- Scipy
+- Numpy
+- Pandas
+
 ## Are you a developer adding to this project?
 Read the document in dev_notes called developer_policies.md to learn the rules for adding to the project.
 
