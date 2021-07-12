@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 
 
 def visualize_nulls_grid(data_list, x_df, y_df):
