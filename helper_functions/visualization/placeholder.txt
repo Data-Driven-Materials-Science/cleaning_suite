@@ -2,5 +2,5 @@ The purpose of this is to ensure that the folder structure remains after commits
 
 Delete when files are in this folder.
 
-Also this is Ashley's section so don't touch it
+
 
