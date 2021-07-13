@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Null Handler Files &mdash; Cleaning Suite V 0.1 documentation</title>
+  <title>null_report_generator.py &mdash; Cleaning Suite V 0.1 documentation</title>
   
 
   
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="correct_nulls_grid.py" href="correct_nulls_grid.html" />
-    <link rel="prev" title="Duplicate Handler Files" href="duplicate_handlers.html" /> 
+    <link rel="next" title="outlier_report_generator.py" href="outlier_report_generator.html" />
+    <link rel="prev" title="Report Generator Files" href="report_generators.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,14 +84,13 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="helper_functions.html">Helper Files</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="duplicate_handlers.html">Duplicate Handler Files</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Null Handler Files</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="correct_nulls_grid.html">correct_nulls_grid.py</a></li>
-<li class="toctree-l3"><a class="reference internal" href="correct_nulls_linear.html">correct_nulls_linear.py</a></li>
-<li class="toctree-l3"><a class="reference internal" href="interpolation_helper.html">interpolation_helper.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="null_handlers.html">Null Handler Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outlier_handlers.html">Outlier Handler Files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="report_generators.html">Report Generator Files</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">null_report_generator.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outlier_report_generator.html">outlier_report_generator.py</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="outlier_handlers.html">Outlier Handler Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="report_generators.html">Report Generator Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization.html">Visualization Files</a></li>
 </ul>
 </li>
@@ -142,13 +141,15 @@
         
           <li><a href="helper_functions.html">Helper Files</a> &raquo;</li>
         
-      <li>Null Handler Files</li>
+          <li><a href="report_generators.html">Report Generator Files</a> &raquo;</li>
+        
+      <li>null_report_generator.py</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/null_handlers.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/null_report_generator.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -161,15 +162,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="null-handler-files">
-<h1>Null Handler Files<a class="headerlink" href="#null-handler-files" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="correct_nulls_grid.html">correct_nulls_grid.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="correct_nulls_linear.html">correct_nulls_linear.py</a></li>
-<li class="toctree-l1"><a class="reference internal" href="interpolation_helper.html">interpolation_helper.py</a></li>
-</ul>
-</div>
+  <div class="section" id="module-null_report_generator">
+<span id="null-report-generator-py"></span><h1>null_report_generator.py<a class="headerlink" href="#module-null_report_generator" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="null_report_generator.generate_report">
+<code class="sig-prename descclassname">null_report_generator.</code><code class="sig-name descname">generate_report</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em><span class="sig-paren">)</span><a class="headerlink" href="#null_report_generator.generate_report" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data_df</strong> – A DataFrame of data we are making a report on</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+<p>Prints out a report on information involving the null values in the passed in DataFrame.
+Included in the report are number of nulls, total points, percent null, mean val, median val,
+standard deviation, and data range.</p>
+</dd></dl>
+
 </div>
 
 
@@ -180,10 +190,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="correct_nulls_grid.html" class="btn btn-neutral float-right" title="correct_nulls_grid.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="outlier_report_generator.html" class="btn btn-neutral float-right" title="outlier_report_generator.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="duplicate_handlers.html" class="btn btn-neutral float-left" title="Duplicate Handler Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="report_generators.html" class="btn btn-neutral float-left" title="Report Generator Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
