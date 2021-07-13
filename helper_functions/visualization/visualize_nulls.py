@@ -2,10 +2,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def visualize_nulls_grid(data_list, x_df, y_df):
+def visualize_nulls_grid(data_df, x_df, y_df):
     """
 
-    :param data_list: A list of data we are interpolating
+    :param data_df: A DataFrame of data we are visualizing
     :param x_df: A DataFrame containing all x values
     :param y_df: A DataFrame containing all y values
 
@@ -22,7 +22,7 @@ def visualize_nulls_grid(data_list, x_df, y_df):
     grid_size_x = len(x_values)
     grid_size_y = len(y_values)
 
-    grid = np.array(data_list)
+    grid = np.array(data_df["Data"].values)
     # grid = np.rot90(grid.reshape(grid_size_x, grid_size_y))
 
     # grid_vals = np.zeros(len(data_list))

@@ -82,6 +82,21 @@ Another new line is added and then the general description of the function itsel
 This formatting not only is good practice, but it is necessary for the auto-documentation software to 
 function properly. If you do not follow then then you will break it.
 
+## Testing
+Inside of the suite there is a testing folder. Anytime you add functionality to the project you must also add
+files which are responsible for testing the functionality. If you added functionality which returns outliers
+and the original DataFrame then you must make your own data set, use the method, and then verify that it is 
+working properly.
+
+These scripts should abide by the following rules:
+- They should be runnable by anyone (assuming they've installed the correct libraries which 
+you've updated in the README.md file). They must not rely off of data files on your local machine
+- They should verify that your functionality is working properly. It should not just call a method
+and exit the program. There should be some print report, visualization or assertion that shows it 
+works.
+- Testing files should be clearly labeled and focus on testing one bit of functionality. A testing
+file should not solely be responsible for testing an entire package.
+
 ## Addition Policies
 When adding to the project, you must branch off of main. Ideally, this project will be
 used in the functionality of several other projects so it is critical you follow
