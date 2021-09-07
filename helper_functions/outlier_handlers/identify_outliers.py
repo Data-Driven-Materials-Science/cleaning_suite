@@ -10,6 +10,11 @@ def return_outliers(data_df, method="Z-Score"):
 
     """
 
+    # TODO parameters will include data properties that determine optimal outlier detection technique
+    # TODO pass in a dictionary, multivariate or univariate, distribution
+
+    # TODO if statement that changes if it is multivariate or univariate
+
     # TODO For every column in the DataFrame we are going to try to correct the outliers inside of it
     for col in []:
         # TODO Switch case based on methods that will be below this

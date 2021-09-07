@@ -1,15 +1,3 @@
-import pandas as pd
-
-from helper_functions.null_handlers.interpolation_helper import *
-
-"""
-The purpose of this class is to correct nulls from data in a grid (2D) format
-"""
-
-
-# TODO Research if there is a situation where a grid can have rows or columns removed
-
-
 def correct_nulls_all(data_df, method, x_df=None, y_df=None, drop_columns=False, threshold=0.3):
     """
 
@@ -33,6 +21,12 @@ def correct_nulls_all(data_df, method, x_df=None, y_df=None, drop_columns=False,
         # TODO insert switch case if statement structure here to correct for every column
 
         # TODO Call one of the methods below in order to
+
+        # TODO For the remove method, we need some way of specifying how many tuples should be null to be removed
+        # TODO also it isn't column by column. This may have to be done with a configuration dictionary
+
+        # TODO Maybe have a for each column method and a for every column at once method
+        # TODO Interpolation is a for each column, remove is a for every column at once
 
         # TODO If the drop_columns is true then check percentage of nulls vs the threshold
 
@@ -92,5 +86,4 @@ def correct_nulls_linear_remove(data_df):
     return None
 
 # TODO research other methods for handling nulls
-
-
+# TODO Research if there is a situation where a grid can have rows or columns removed

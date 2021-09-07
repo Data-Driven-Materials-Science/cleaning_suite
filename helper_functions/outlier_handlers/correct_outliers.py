@@ -8,9 +8,9 @@ def correct_outliers(data_df, x_df=None, y_df=None, outlier_identification_metho
     :param x_df: A DataFrame of the x coordinates of the grid
     :param y_df: A DataFrame of the y coordinates of the grid
     :param outlier_identification_method: The method to identify outliers by, must be "Z-Score" or "IQR" as of
-        right now. # TODO
+        right now. TODO
 
-    :param outlier_correction_method: The method to correct outliers by. Must be # TODO
+    :param outlier_correction_method: The method to correct outliers by. Must be TODO
 
     # TODO Should we just specify which columns to remove outliers from? If so then add another param
 
