@@ -6,6 +6,8 @@ from helper_functions.null_handlers.interpolation_helper import *
 The purpose of this class is to correct nulls from data in a grid (2D) format
 """
 
+# TODO Research if there is a situation where a grid can have rows or columns removed
+
 
 def correct_nulls_grid_interpolation(data_df, x_df, y_df):
     """
@@ -36,24 +38,6 @@ def correct_nulls_grid_interpolation(data_df, x_df, y_df):
     ret_df = pd.DataFrame(interpolation_result_two, columns=["Data"])
 
     return ret_df
-
-
-def correct_nulls_grid_remove(data_df, x_df, y_df):
-    """
-
-    :param data_df: A DataFrame of data
-    :param x_df: A DataFrame of x values
-    :param y_df: A DataFrame of y values
-
-    :return: The corrected data as a DataFrame
-
-    Corrects the nulls in the data DataFrame
-
-    """
-
-    # TODO
-
-    return None
 
 
 def correct_nulls_grid_average(data_df, x_df, y_df):

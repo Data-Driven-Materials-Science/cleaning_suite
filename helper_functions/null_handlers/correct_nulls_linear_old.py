@@ -2,6 +2,8 @@
 The purpose of this class is to correct nulls from data in a linear (1D) format
 """
 
+# TODO research other methods for handling nulls
+
 
 def correct_nulls_linear_remove(data_df):
     """
