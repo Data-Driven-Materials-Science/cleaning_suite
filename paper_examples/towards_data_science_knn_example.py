@@ -29,6 +29,9 @@ nbrs.fit(X)
 distances, indexes = nbrs.kneighbors(X)
 # plot mean of k-distances of each observation
 plt.plot(distances.mean(axis =1))
+plt.title("k-NN Distance Values")
+plt.ylabel("Distance Values")
+plt.xlabel("Point Index")
 plt.show()
 
 # visually determine cutoff values > 0.15

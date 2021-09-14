@@ -3,6 +3,8 @@ import numpy as np
 from scipy.stats import iqr
 from sklearn.cluster import DBSCAN
 from sklearn.neighbors import NearestNeighbors
+
+
 # import matplotlib.pyplot as plt
 
 
@@ -65,10 +67,13 @@ def boxplot_method(data_df, method_details):
 
     z_value = None
 
+    # The extra 0.5 is added to allow us to treat this exactly the same as the z-score method for how the values are
+    # returned
+
     if outlier_type == "mild":
-        z_value = 1.5
+        z_value = 1.5 + 0.5
     elif outlier_type == "extreme":
-        z_value = 3
+        z_value = 3 + 0.5
     else:
         print("You entered a wrong method_type!")
         return None

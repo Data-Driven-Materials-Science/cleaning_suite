@@ -42,8 +42,8 @@ plt.xlabel("Data Point Value")
 plt.ylabel("Data Point Frequency")
 plt.show()
 
-assert len(non_outliers["Data"].values) == 90
-assert len(outliers["Data"].values) == 14
+assert len(non_outliers["Data"].values) == 100
+assert len(outliers["Data"].values) == 4
 
 method_details = {"method_name": "boxplot", "outlier_type": "extreme", "is_univariate": True}
 
