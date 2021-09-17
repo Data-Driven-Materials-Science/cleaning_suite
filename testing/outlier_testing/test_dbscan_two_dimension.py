@@ -25,25 +25,25 @@ combined_list = combined_list.reshape(-1, 2)
 
 data_df = pd.DataFrame(combined_list, columns=["Data X", "Data Y"])
 
-plt.scatter(data_df["Data X"].values, data_df["Data Y"], color="blue")
-plt.title("Original Data Set")
-plt.xlabel("Data Point X Value")
-plt.ylabel("Data Point Y Value")
-plt.show()
+# plt.scatter(data_df["Data X"].values, data_df["Data Y"], color="blue")
+# plt.title("Original Data Set")
+# plt.xlabel("Data Point X Value")
+# plt.ylabel("Data Point Y Value")
+# plt.show()
 
 method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5}
 
 # print(identify_outliers.return_outliers(data_df=data_df, method_details=method_details))
 non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
-plt.scatter(non_outliers["Data X"].values, non_outliers["Data Y"], color="green")
-plt.scatter(outliers["Data X"].values, outliers["Data Y"], color="red")
-plt.title("Outliers Detected From Original Set")
-plt.xlabel("Data Point X Value")
-plt.ylabel("Data Point Y Value")
-plt.show()
+# plt.scatter(non_outliers["Data X"].values, non_outliers["Data Y"], color="green")
+# plt.scatter(outliers["Data X"].values, outliers["Data Y"], color="red")
+# plt.title("Outliers Detected From Original Set")
+# plt.xlabel("Data Point X Value")
+# plt.ylabel("Data Point Y Value")
+# plt.show()
 
 assert len(non_outliers["Data X"].values) == 80
 assert len(outliers["Data X"].values) == 24
 
-exit(0)
+# exit(0)

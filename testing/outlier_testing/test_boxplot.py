@@ -23,24 +23,24 @@ while accumulator < max_limit:
     accumulator = accumulator + interval_increment
 
 data_df = pd.DataFrame(s, columns=["Data"])
-
-plt.hist(data_df["Data"].values, bins=intervals, color="blue")
-plt.title("Original Data Set")
-plt.xlabel("Data Point Value")
-plt.ylabel("Data Point Frequency")
-plt.show()
+#
+# plt.hist(data_df["Data"].values, bins=intervals, color="blue")
+# plt.title("Original Data Set")
+# plt.xlabel("Data Point Value")
+# plt.ylabel("Data Point Frequency")
+# plt.show()
 
 method_details = {"method_name": "boxplot", "outlier_type": "mild", "is_univariate": True}
 
 print(identify_outliers.return_outliers(data_df=data_df, method_details=method_details))
 non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
-plt.hist(non_outliers["Data"].values, bins=intervals, color="green")
-plt.hist(outliers["Data"].values, bins=intervals, color="red")
-plt.title("Outliers Detected From Original Set")
-plt.xlabel("Data Point Value")
-plt.ylabel("Data Point Frequency")
-plt.show()
+# plt.hist(non_outliers["Data"].values, bins=intervals, color="green")
+# plt.hist(outliers["Data"].values, bins=intervals, color="red")
+# plt.title("Outliers Detected From Original Set")
+# plt.xlabel("Data Point Value")
+# plt.ylabel("Data Point Frequency")
+# plt.show()
 
 assert len(non_outliers["Data"].values) == 100
 assert len(outliers["Data"].values) == 4
@@ -49,14 +49,14 @@ method_details = {"method_name": "boxplot", "outlier_type": "extreme", "is_univa
 
 non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
-plt.hist(non_outliers["Data"].values, bins=intervals, color="green")
-plt.hist(outliers["Data"].values, bins=intervals, color="red")
-plt.title("Outliers Detected From Original Set")
-plt.xlabel("Data Point Value")
-plt.ylabel("Data Point Frequency")
-plt.show()
+# plt.hist(non_outliers["Data"].values, bins=intervals, color="green")
+# plt.hist(outliers["Data"].values, bins=intervals, color="red")
+# plt.title("Outliers Detected From Original Set")
+# plt.xlabel("Data Point Value")
+# plt.ylabel("Data Point Frequency")
+# plt.show()
 
 assert len(non_outliers["Data"].values) == 100
 assert len(outliers["Data"].values) == 4
 
-exit(0)
+# exit(0)
