@@ -13,13 +13,15 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../helper_functions'))
-sys.path.insert(0, os.path.abspath('../helper_functions/duplicate_handlers'))
-sys.path.insert(0, os.path.abspath('../helper_functions/null_handlers'))
-sys.path.insert(0, os.path.abspath('../helper_functions/outlier_handlers'))
-sys.path.insert(0, os.path.abspath('../helper_functions/report_generators'))
-sys.path.insert(0, os.path.abspath('../helper_functions/visualization'))
 sys.path.append(os.path.abspath('..'))
+
+# print(os.listdir("../helper_functions"))
+
+for name in os.listdir("../helper_functions"):
+    if os.path.isdir("../helper_functions/" + name):
+        # print("../helper_functions/" + str(name))
+        sys.path.append(("../helper_functions/" + name))
+
 
 # -- Project information -----------------------------------------------------
 

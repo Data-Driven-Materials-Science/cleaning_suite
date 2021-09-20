@@ -165,22 +165,42 @@
   <div class="section" id="module-identify_outliers">
 <span id="identify-outliers-py"></span><h1>identify_outliers.py<a class="headerlink" href="#module-identify_outliers" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
+<dt id="identify_outliers.boxplot_method">
+<code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">boxplot_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method_details</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.boxplot_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="identify_outliers.dbscan_method">
+<code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">dbscan_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method_details</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.dbscan_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="identify_outliers.k_nearest_neighbors_method">
+<code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">k_nearest_neighbors_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method_details</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.k_nearest_neighbors_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="identify_outliers.return_outliers">
-<code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">return_outliers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'Z-Score'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.return_outliers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">return_outliers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method_details</span><span class="o">=</span><span class="default_value">{'is_univariate': True, 'method_name': 'z-score', 'z_value': 3}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.return_outliers" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data_df</strong> – A DataFrame which holds all of the data we will be detecting outliers in</p></li>
-<li><p><strong>method</strong> – The method to remove outliers by, must be “Z-Score” or “IQR” as of right now</p></li>
+<li><p><strong>method_details</strong> – A dictionary of the details of the outlier detection method we are using. Contains
+different parameters depending on the method we are using.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A DataFrame without outliers and a DataFrame with outliers</p>
+<dd class="field-even"><p>Two DataFrames. One DataFrame without outliers and one DataFrame with outliers. Same columns.</p>
 </dd>
 </dl>
-<p>Removes the outliers inside of the data_df DataFrame and corrects them according to the data around them in
-their grid.</p>
+<p>Identifies the outliers inside of the data_df DataFrame.</p>
 </dd></dl>
+
+<dl class="py function">
+<dt id="identify_outliers.z_score_method">
+<code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">z_score_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method_details</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.z_score_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 
