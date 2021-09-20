@@ -167,17 +167,72 @@
 <dl class="py function">
 <dt id="identify_outliers.boxplot_method">
 <code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">boxplot_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method_details</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.boxplot_method" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_df</strong> – The DataFrame which contains the one dimensional, univariate data</p></li>
+<li><p><strong>method_details</strong> – The details we are using for this outlier detection method. The parameter
+‘outlier_type’ determines which z values to use for the equation. ‘mild’ uses 1.5 while ‘extreme’ uses 3.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values</p>
+</dd>
+</dl>
+<p>This method determines which values are outliers according to the boxplot outlier detection method. Once this
+is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
+original data can then be rebuilt as the index is preserved for the non outliers and outlier data points. This
+method uses the boxplot method. It takes the first and third quartile to determine the Interquartile Range (IQR).
+Once this is done, it takes all values outside of the interval (q1 - z*IQR, q3 + z*IQR) and marks them as
+outliers. The z values varies depending on level of outliers.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="identify_outliers.dbscan_method">
 <code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">dbscan_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method_details</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.dbscan_method" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_df</strong> – The DataFrame which contains the n dimensional, univariate or multivariate data</p></li>
+<li><p><strong>method_details</strong> – The details we are using for this outlier detection method DBSCAN was taken from</p></li>
+</ul>
+</dd>
+</dl>
+<p>sklearn’s library at <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html">https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html</a>.
+Parameters ‘eps’, ‘min_samples’, and ‘algorithm’ are used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values.</p>
+</dd>
+</dl>
+<p>This method determines which values are outliers according to the DBSCAN outlier detection method. Once this
+is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
+original data can then be rebuilt as the index is preserved for the non outliers and outlier data points. This
+method works by clustering the data using DBSCAN. All data points which do not end up in a cluster are then
+labeled as outliers.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="identify_outliers.k_nearest_neighbors_method">
 <code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">k_nearest_neighbors_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method_details</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.k_nearest_neighbors_method" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_df</strong> – The DataFrame which contains the n dimensional, univariate or multivariate data</p></li>
+<li><p><strong>method_details</strong> – The details we are using for this outlier detection method</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values. The</p>
+</dd>
+</dl>
+<p>parameter ‘cutoff’ is used to determine what cutoff to use for a distance value needed for a point to not be
+considered an outlier.</p>
+<p>This method determines which values are outliers according to the k-NN outlier detection method. Once this
+is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
+original data can then be rebuilt as the index is preserved for the non outliers and outlier data points.
+This method is taken from sklean’s neighbors module at <a class="reference external" href="https://scikit-learn.org/stable/modules/neighbors.html">https://scikit-learn.org/stable/modules/neighbors.html</a>.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="identify_outliers.return_outliers">
@@ -200,7 +255,26 @@ different parameters depending on the method we are using.</p></li>
 <dl class="py function">
 <dt id="identify_outliers.z_score_method">
 <code class="sig-prename descclassname">identify_outliers.</code><code class="sig-name descname">z_score_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">method_details</span></em><span class="sig-paren">)</span><a class="headerlink" href="#identify_outliers.z_score_method" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_df</strong> – The DataFrame which contains the one dimensional, univariate data</p></li>
+<li><p><strong>method_details</strong> – The details we are using for this outlier detection method. The parameter ‘z_value’</p></li>
+</ul>
+</dd>
+</dl>
+<p>determines which z value to use for this method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values</p>
+</dd>
+</dl>
+<p>This method determines which values are outliers according to the z-score outlier detection method. Once this
+is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
+original data can then be rebuilt as the index is preserved for the non outliers and outlier data points. This
+method calculates the standard deviation and mean value, identifying any point more than z standard deviations
+away from the mean as an outlier.</p>
+</dd></dl>
 
 </div>
 

@@ -35,21 +35,36 @@ def return_outliers(data_df, method_details={"method_name": "z-score", "z_value"
         print("You have the wrong method details!")
         return -1
 
-    # TODO parameters will include data properties that determine optimal outlier detection technique
-    # TODO pass in a dictionary, multivariate or univariate, distribution
-
-    # TODO if statement that changes if it is multivariate or univariate
-
-    # TODO For every column in the DataFrame we are going to try to correct the outliers inside of it
-    for col in []:
-        # TODO Switch case based on methods that will be below this
-
-        break
+    # # TODO parameters will include data properties that determine optimal outlier detection technique
+    # # TODO pass in a dictionary, multivariate or univariate, distribution
+    #
+    # # TODO if statement that changes if it is multivariate or univariate
+    #
+    # # TODO For every column in the DataFrame we are going to try to correct the outliers inside of it
+    # for col in []:
+    #     # TODO Switch case based on methods that will be below this
+    #
+    #     break
 
     return None
 
 
 def z_score_method(data_df, method_details):
+    """
+    
+    :param data_df: The DataFrame which contains the one dimensional, univariate data
+    :param method_details: The details we are using for this outlier detection method. The parameter 'z_value'
+    determines which z value to use for this method.
+
+    :return: Two DataFrames, the first with non outlier values and the second containing all outlier values
+    
+    This method determines which values are outliers according to the z-score outlier detection method. Once this
+    is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
+    original data can then be rebuilt as the index is preserved for the non outliers and outlier data points. This
+    method calculates the standard deviation and mean value, identifying any point more than z standard deviations
+    away from the mean as an outlier.
+
+    """
     assert method_details["z_value"] is not None
 
     z_value = method_details["z_value"]
@@ -61,6 +76,22 @@ def z_score_method(data_df, method_details):
 
 
 def boxplot_method(data_df, method_details):
+    """
+
+    :param data_df: The DataFrame which contains the one dimensional, univariate data
+    :param method_details: The details we are using for this outlier detection method. The parameter
+        'outlier_type' determines which z values to use for the equation. 'mild' uses 1.5 while 'extreme' uses 3.
+
+    :return: Two DataFrames, the first with non outlier values and the second containing all outlier values
+
+    This method determines which values are outliers according to the boxplot outlier detection method. Once this
+    is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
+    original data can then be rebuilt as the index is preserved for the non outliers and outlier data points. This
+    method uses the boxplot method. It takes the first and third quartile to determine the Interquartile Range (IQR).
+    Once this is done, it takes all values outside of the interval (q1 - z*IQR, q3 + z*IQR) and marks them as
+    outliers. The z values varies depending on level of outliers.
+
+    """
     assert method_details["outlier_type"] is not None
 
     outlier_type = method_details["outlier_type"]
@@ -90,6 +121,24 @@ def boxplot_method(data_df, method_details):
 
 
 def dbscan_method(data_df, method_details):
+    """
+
+    :param data_df: The DataFrame which contains the n dimensional, univariate or multivariate data
+    :param method_details: The details we are using for this outlier detection method DBSCAN was taken from
+    sklearn's library at https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html.
+    Parameters 'eps', 'min_samples', and 'algorithm' are used.
+
+
+    :return: Two DataFrames, the first with non outlier values and the second containing all outlier values.
+
+    This method determines which values are outliers according to the DBSCAN outlier detection method. Once this
+    is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
+    original data can then be rebuilt as the index is preserved for the non outliers and outlier data points. This
+    method works by clustering the data using DBSCAN. All data points which do not end up in a cluster are then
+    labeled as outliers.
+
+    """
+
     assert method_details["algorithm"] is not None
     assert method_details["eps"] is not None
     assert method_details["min_samples"] is not None
@@ -120,6 +169,21 @@ def dbscan_method(data_df, method_details):
 
 
 def k_nearest_neighbors_method(data_df, method_details):
+    """
+
+    :param data_df: The DataFrame which contains the n dimensional, univariate or multivariate data
+    :param method_details: The details we are using for this outlier detection method
+
+    :return: Two DataFrames, the first with non outlier values and the second containing all outlier values. The
+    parameter 'cutoff' is used to determine what cutoff to use for a distance value needed for a point to not be
+    considered an outlier.
+
+    This method determines which values are outliers according to the k-NN outlier detection method. Once this
+    is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
+    original data can then be rebuilt as the index is preserved for the non outliers and outlier data points.
+    This method is taken from sklean's neighbors module at https://scikit-learn.org/stable/modules/neighbors.html.
+
+    """
     assert method_details["cut_off"] is not None
 
     cut_off_val = method_details["cut_off"]
