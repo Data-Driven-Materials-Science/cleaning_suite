@@ -13,5 +13,5 @@ def generate_report(data_df, outlier_df):
 
     """
 
-    return None
+    return data_df.describe(), outlier_df.describe()
 
