@@ -162,9 +162,9 @@ def dbscan_method(data_df, method_details):
     outlier_df = outlier_df.drop(columns=["DBSCAN_Results"])
     non_outliers_df = non_outliers_df.drop(columns=["DBSCAN_Results"])
 
-    print(outlier_df)
-    print(non_outliers_df)
-
+    # print(outlier_df)
+    # print(non_outliers_df)
+    #
     return non_outliers_df, outlier_df
 
 
