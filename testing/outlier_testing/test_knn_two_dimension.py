@@ -37,9 +37,6 @@ def helper_test_method(method_details, outlier_num, non_outlier_num, show=False)
         plt.ylabel("Data Point Y Value")
         plt.show()
 
-    print(len(non_outliers[non_outliers.columns[0]].values))
-    print(len(outliers[outliers.columns[0]].values))
-
     assert len(non_outliers[non_outliers.columns[0]].values) == non_outlier_num
     assert len(outliers[outliers.columns[0]].values) == outlier_num
 

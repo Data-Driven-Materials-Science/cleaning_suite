@@ -16,6 +16,8 @@ s_x = np.append(s_x, outliers_x)
 s_y = np.append(s_y, outliers_y)
 s_z = np.append(s_z, outliers_z)
 
+# Data sets that have varying dimensionality with most points centered around origin and 4 points 20 units away in each
+# direction
 data_df_1d = pd.DataFrame()
 data_df_2d = pd.DataFrame()
 data_df_3d = pd.DataFrame()

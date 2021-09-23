@@ -1,11 +1,7 @@
-import pandas as pd
 import numpy as np
 from scipy.stats import iqr
 from sklearn.cluster import DBSCAN
 from sklearn.neighbors import NearestNeighbors
-
-
-# import matplotlib.pyplot as plt
 
 
 def return_outliers(data_df, method_details={"method_name": "z-score", "z_value": 3, "is_univariate": True}):
@@ -34,17 +30,6 @@ def return_outliers(data_df, method_details={"method_name": "z-score", "z_value"
     except KeyError:
         print("You have the wrong method details!")
         return -1
-
-    # # TODO parameters will include data properties that determine optimal outlier detection technique
-    # # TODO pass in a dictionary, multivariate or univariate, distribution
-    #
-    # # TODO if statement that changes if it is multivariate or univariate
-    #
-    # # TODO For every column in the DataFrame we are going to try to correct the outliers inside of it
-    # for col in []:
-    #     # TODO Switch case based on methods that will be below this
-    #
-    #     break
 
     return None
 
@@ -96,10 +81,7 @@ def boxplot_method(data_df, method_details):
 
     outlier_type = method_details["outlier_type"]
 
-    z_value = None
-
-    # The extra 0.5 is added to allow us to treat this exactly the same as the z-score method for how the values are
-    # returned
+    # 0.5 is added to allow us to treat this exactly the same as the z-score method for how the values are returned
 
     if outlier_type == "mild":
         z_value = 1.5 + 0.5
@@ -162,9 +144,6 @@ def dbscan_method(data_df, method_details):
     outlier_df = outlier_df.drop(columns=["DBSCAN_Results"])
     non_outliers_df = non_outliers_df.drop(columns=["DBSCAN_Results"])
 
-    # print(outlier_df)
-    # print(non_outliers_df)
-    #
     return non_outliers_df, outlier_df
 
 
@@ -190,32 +169,19 @@ def k_nearest_neighbors_method(data_df, method_details):
 
     raw_values = data_df.values
 
-    # print(raw_values)
-
     nearest_neighbors_model = NearestNeighbors(n_neighbors=3)
 
     nearest_neighbors_model.fit(raw_values)
 
-    # distances and indexes of k-neaighbors from model outputs
+    # A list of the distance values along with the indexes
     distance_values, index_values = nearest_neighbors_model.kneighbors(raw_values)
-    # # plot mean of k-distances of each observation
-    # plt.plot(distance_values.mean(axis=1))
-    # plt.show()
 
-    # visually determine cutoff values > 0.15
+    # All values with a distance value above the cutoff are deemed outliers
     outlier_index = np.where(distance_values.mean(axis=1) > cut_off_val)
-    # print(outlier_index[0])
 
-    # filter outlier values
+    # Mark the outlier values and the non outlier values
     outlier_index_values = data_df.index.isin(outlier_index[0])
     non_outlier_df = data_df[~outlier_index_values]
     outlier_df = data_df[outlier_index_values]
-    # print(outlier_values)
-
-    # plot data
-    # plt.scatter(df["sepal_length"], df["sepal_width"], color="b", s=65)
-    # plot outlier values
-    # plt.scatter(outlier_values["sepal_length"], outlier_values["sepal_width"], color="r")
-    # plt.show()
 
     return non_outlier_df, outlier_df
