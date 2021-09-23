@@ -1,7 +1,7 @@
-correct_nulls_linear.py
+test_report_outliers.py
 =======================
 
-.. automodule:: correct_nulls_linear
+.. automodule:: test_report_outliers
    :members:
    :undoc-members:
    :show-inheritance:

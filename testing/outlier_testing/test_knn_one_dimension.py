@@ -87,7 +87,7 @@ def test_method3(show=False):
     :param show: Boolean of whether or not to plot the results of the process and the original data
 
     Runs k-NN detection with the configuration of
-    {"method_name": "knn", "is_univariate": False, "cut_off": 0.15}
+    {"method_name": "knn", "is_univariate": False, "cut_off": 0.35}
     """
 
     data_df = data_df_1d.copy()
@@ -123,7 +123,7 @@ def test_method4(show=False):
     :param show: Boolean of whether or not to plot the results of the process and the original data
 
     Runs k-NN detection with the configuration of
-    {"method_name": "knn", "is_univariate": False, "cut_off": 0.15}
+    {"method_name": "knn", "is_univariate": False, "cut_off": 0.45}
     """
 
     data_df = data_df_1d.copy()

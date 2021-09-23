@@ -39,7 +39,7 @@ def z_score_method(data_df, method_details):
     
     :param data_df: The DataFrame which contains the one dimensional, univariate data
     :param method_details: The details we are using for this outlier detection method. The parameter 'z_value'
-    determines which z value to use for this method.
+        determines which z value to use for this method.
 
     :return: Two DataFrames, the first with non outlier values and the second containing all outlier values
     
@@ -107,8 +107,8 @@ def dbscan_method(data_df, method_details):
 
     :param data_df: The DataFrame which contains the n dimensional, univariate or multivariate data
     :param method_details: The details we are using for this outlier detection method DBSCAN was taken from
-    sklearn's library at https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html.
-    Parameters 'eps', 'min_samples', and 'algorithm' are used.
+        sklearn's library at https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html.
+        Parameters 'eps', 'min_samples', and 'algorithm' are used.
 
 
     :return: Two DataFrames, the first with non outlier values and the second containing all outlier values.
@@ -154,8 +154,8 @@ def k_nearest_neighbors_method(data_df, method_details):
     :param method_details: The details we are using for this outlier detection method
 
     :return: Two DataFrames, the first with non outlier values and the second containing all outlier values. The
-    parameter 'cutoff' is used to determine what cutoff to use for a distance value needed for a point to not be
-    considered an outlier.
+        parameter 'cutoff' is used to determine what cutoff to use for a distance value needed for a point to not be
+        considered an outlier.
 
     This method determines which values are outliers according to the k-NN outlier detection method. Once this
     is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The

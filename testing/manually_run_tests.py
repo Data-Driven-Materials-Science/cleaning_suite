@@ -1,7 +1,7 @@
 from testing.outlier_testing import test_boxplot, test_dbscan_one_dimension, test_dbscan_two_dimension, \
     test_knn_one_dimension, test_knn_two_dimension, test_z_score
 from testing.visualization_testing import test_visualize_outliers
-from testing.report_resting import test_report_outliers
+from testing.report_testing import test_report_outliers
 
 # Runs the outlier detection testing for the boxplot outlier detection type
 assert test_boxplot.test_method1(show=True)
