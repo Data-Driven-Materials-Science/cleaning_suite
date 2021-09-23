@@ -1,66 +1,124 @@
-import numpy as np
+from testing import testing_data_sets
+
 from helper_functions.outlier_handlers import identify_outliers
 import matplotlib.pyplot as plt
-import pandas as pd
+
+# Import our data sets
+data_df_2d = testing_data_sets.data_df_2d.copy()
 
 
-def test_method1():
-    # Tests the z score outlier removal
-    np.random.seed(10)
+def helper_test_method(method_details, outlier_num, non_outlier_num, show=False):
+    """
 
-    mu, sigma = 0, 1  # mean and standard deviation
-    mu_outliers, sigma_outliers = 20, 1  # mean and standard deviation
-    s_x = np.random.normal(mu, sigma, 100)
-    s_y = np.random.normal(mu, sigma, 100)
-    outliers_x = np.random.normal(mu_outliers, sigma_outliers, 4)
-    outliers_y = np.random.normal(mu_outliers, sigma_outliers, 4)
-    s_x = np.append(s_x, outliers_x)
-    s_y = np.append(s_y, outliers_y)
+    :param method_details: The details of the method configuration we are running
+    :param outlier_num: The number of expected outliers
+    :param non_outlier_num: The number of expected non outliers
+    :param show: Boolean of whether or not to plot the results of the process and the original data
 
-    # print(s_x)
-    # print(s_y)
+    Runs k-NN detection with the configuration of method_details
+    """
 
-    combined_list = np.append(s_x, s_y)
-    combined_list = combined_list.reshape(-1, 2)
+    data_df = data_df_2d.copy()
 
-    # print(combined_list)
+    if show:
+        plt.scatter(data_df[data_df.columns[0]].values, data_df[data_df.columns[1]], color="blue")
+        plt.title("Original Data Set - k-NN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
 
-    data_df = pd.DataFrame(combined_list, columns=["Data X", "Data Y"])
-
-    # plt.scatter(data_df["Data X"].values, data_df["Data Y"], color="blue")
-    # plt.title("Original Data Set")
-    # plt.xlabel("Data Point X Value")
-    # plt.ylabel("Data Point Y Value")
-    # plt.show()
-
-    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.15}
-
-    print(identify_outliers.return_outliers(data_df=data_df, method_details=method_details))
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
-    # plt.scatter(non_outliers["Data X"].values, non_outliers["Data Y"], color="green")
-    # plt.scatter(outliers["Data X"].values, outliers["Data Y"], color="red")
-    # plt.title("Outliers Detected From Original Set")
-    # plt.xlabel("Data Point X Value")
-    # plt.ylabel("Data Point Y Value")
-    # plt.show()
+    if show:
+        plt.scatter(non_outliers[non_outliers.columns[0]].values, non_outliers[non_outliers.columns[1]], color="green")
+        plt.scatter(outliers[outliers.columns[0]].values, outliers[outliers.columns[1]], color="red")
+        plt.title("Outliers Detected From Original Set - k-NN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
 
-    assert len(non_outliers["Data X"].values) == 47
-    assert len(outliers["Data X"].values) == 57
+    print(len(non_outliers[non_outliers.columns[0]].values))
+    print(len(outliers[outliers.columns[0]].values))
 
-    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.35}
+    assert len(non_outliers[non_outliers.columns[0]].values) == non_outlier_num
+    assert len(outliers[outliers.columns[0]].values) == outlier_num
 
-    print(identify_outliers.return_outliers(data_df=data_df, method_details=method_details))
-    non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
+    return True
 
-    # plt.scatter(non_outliers["Data X"].values, non_outliers["Data Y"], color="green")
-    # plt.scatter(outliers["Data X"].values, outliers["Data Y"], color="red")
-    # plt.title("Outliers Detected From Original Set")
-    # plt.xlabel("Data Point X Value")
-    # plt.ylabel("Data Point Y Value")
-    # plt.show()
 
-    assert len(non_outliers["Data X"].values) == 89
-    assert len(outliers["Data X"].values) == 15
+def test_method1(show=False):
+    """
 
-    # exit(0)
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs k-NN detection with the configuration of
+    {"method_name": "knn", "is_univariate": False, "cut_off": 0.15}
+    """
+
+    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.15}, show=show,
+                              outlier_num=52, non_outlier_num=52)
+
+
+def test_method2(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs k-NN detection with the configuration of
+    {"method_name": "knn", "is_univariate": False, "cut_off": 0.25}
+    """
+
+    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.25}, show=show,
+                              outlier_num=24, non_outlier_num=80)
+
+
+def test_method3(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs k-NN detection with the configuration of
+    {"method_name": "knn", "is_univariate": False, "cut_off": 0.35}
+    """
+
+    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.35}, show=show,
+                              outlier_num=20, non_outlier_num=84)
+
+
+def test_method4(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs k-NN detection with the configuration of
+    {"method_name": "knn", "is_univariate": False, "cut_off": 0.45}
+    """
+
+    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.45}, show=show,
+                              outlier_num=11, non_outlier_num=93)
+
+
+def test_method5(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs k-NN detection with the configuration of
+    {"method_name": "knn", "is_univariate": False, "cut_off": 0.55}
+    """
+
+    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.55}, show=show,
+                              outlier_num=7, non_outlier_num=97)
+
+
+def test_method6(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs k-NN detection with the configuration of
+    {"method_name": "knn", "is_univariate": False, "cut_off": 0.65}
+    """
+
+    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.65}, show=show,
+                              outlier_num=6, non_outlier_num=98)
