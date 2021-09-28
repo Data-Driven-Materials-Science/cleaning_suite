@@ -5,8 +5,8 @@ from helper_functions.visualization import visualize_outliers
 
 # Import our data sets
 data_df_1d = testing_data_sets.data_df_1d.copy()
-data_df_2d = testing_data_sets.data_df_1d.copy()
-data_df_3d = testing_data_sets.data_df_1d.copy()
+data_df_2d = testing_data_sets.data_df_2d.copy()
+data_df_3d = testing_data_sets.data_df_3d.copy()
 
 
 def test_z_score_1d(show=False):
@@ -129,6 +129,7 @@ def test_DBSCAN_3d(show=False):
         {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 5},
     ]
 
+    print(data_df_3d.copy())
     for method_detail_individual in method_details:
         non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df_3d.copy(),
                                                                    method_details=method_detail_individual)
