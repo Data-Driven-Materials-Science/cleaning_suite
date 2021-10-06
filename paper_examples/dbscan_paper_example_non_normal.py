@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import DBSCAN
 import math
+from paper_examples import figure_colors_key as ck
 
 np.random.seed(10)
 
@@ -30,7 +31,7 @@ data_df_2d["Data X"] = data_x
 data_df_2d["Data Y"] = data_y
 
 # Raw Data Being Plotted
-plt.scatter(data_df_2d["Data X"], data_df_2d["Data Y"], color="b")
+plt.scatter(data_df_2d["Data X"], data_df_2d["Data Y"], color=ck.raw_data_color)
 plt.title("Raw Data Values")
 plt.xlabel("Data Point X Values")
 plt.ylabel("Data Point Y Values")
@@ -43,10 +44,10 @@ dbscan_results = dbscan.labels_
 combined_df = data_df_2d.copy()
 combined_df["DBSCAN_Results"] = dbscan_results
 
-unique_clusters = np.unique(dbscan_results)
+unique_clusters = np.sort(np.unique(dbscan_results))
 print(unique_clusters)
 
-colors = ["grey", "r", "g", "b"]
+colors = np.append([ck.outlier_color], ck.resulting_data_colors)
 for cluster_value in unique_clusters:
     points_to_plot = combined_df[combined_df["DBSCAN_Results"] == cluster_value]
     if cluster_value == -1:

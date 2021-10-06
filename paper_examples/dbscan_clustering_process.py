@@ -1,5 +1,6 @@
 # Import the Necessary Libraries
 import matplotlib.pyplot as plt
+from paper_examples import figure_colors_key as ck
 
 circles = []
 red_points = [(5, 5), (4.5, 5), (4.5, 4.5), (5.5, 5), (5.5, 5.5), (5, 4.5)]
@@ -7,11 +8,11 @@ orange_points = [(6.1, 6.1), (4, 4)]
 blue_points = [(8, 8), (8, 2), (3, 3), (1, 4), (2, 8)]
 
 for point in red_points:
-    circles.append(plt.Circle(point, 1, color="red", fill=False))
+    circles.append(plt.Circle(point, 1, color=ck.resulting_data_colors[0], fill=False))
 for point in orange_points:
-    circles.append(plt.Circle(point, 1, color="orange", fill=False))
+    circles.append(plt.Circle(point, 1, color=ck.resulting_data_colors[1], fill=False))
 for point in blue_points:
-    circles.append(plt.Circle(point, 1, color="blue", fill=False))
+    circles.append(plt.Circle(point, 1, color=ck.outlier_color, fill=False))
 
 ax = plt.gca()
 ax.cla()  # clear things for fresh plot
@@ -41,9 +42,9 @@ for point in blue_points:
     x_blue.append(point[0])
     y_blue.append(point[1])
 
-ax.scatter(x_red, y_red, color="red", label="Core Point")
-ax.scatter(x_orange, y_orange, color="orange", label="Border Point")
-ax.scatter(x_blue, y_blue, color="blue", label="Outlier")
+ax.scatter(x_red, y_red, color=ck.resulting_data_colors[0], label="Core Point")
+ax.scatter(x_orange, y_orange, color=ck.resulting_data_colors[1], label="Border Point")
+ax.scatter(x_blue, y_blue, color=ck.outlier_color, label="Outlier")
 
 for circle in circles:
     ax.add_patch(circle)
