@@ -1,52 +1,191 @@
-import numpy as np
+from testing import testing_data_sets
+
 from helper_functions.outlier_handlers import identify_outliers
 import matplotlib.pyplot as plt
-import pandas as pd
+
+# Import our data sets
+data_df_2d = testing_data_sets.data_df_2d.copy()
 
 
-def test_method1():
-    # Tests the z score outlier removal
-    np.random.seed(10)
+def test_method1(show=False):
+    """
 
-    mu, sigma = 0, 1  # mean and standard deviation
-    mu_outliers, sigma_outliers = 20, 1  # mean and standard deviation
-    s_x = np.random.normal(mu, sigma, 100)
-    s_y = np.random.normal(mu, sigma, 100)
-    outliers_x = np.random.normal(mu_outliers, sigma_outliers, 4)
-    outliers_y = np.random.normal(mu_outliers, sigma_outliers, 4)
-    s_x = np.append(s_x, outliers_x)
-    s_y = np.append(s_y, outliers_y)
+    :param show: Boolean of whether or not to plot the results of the process and the original data
 
-    # print(s_x)
-    # print(s_y)
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5}
+    """
 
-    combined_list = np.append(s_x, s_y)
-    combined_list = combined_list.reshape(-1, 2)
+    data_df = data_df_2d.copy()
 
-    # print(combined_list)
-
-    data_df = pd.DataFrame(combined_list, columns=["Data X", "Data Y"])
-
-    # plt.scatter(data_df["Data X"].values, data_df["Data Y"], color="blue")
-    # plt.title("Original Data Set")
-    # plt.xlabel("Data Point X Value")
-    # plt.ylabel("Data Point Y Value")
-    # plt.show()
+    if show:
+        plt.scatter(data_df[data_df.columns[0]].values, data_df[data_df.columns[1]], color="blue")
+        plt.title("Original Data Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
 
     method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5,
                       "min_samples": 5}
 
-    # print(identify_outliers.return_outliers(data_df=data_df, method_details=method_details))
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
-    # plt.scatter(non_outliers["Data X"].values, non_outliers["Data Y"], color="green")
-    # plt.scatter(outliers["Data X"].values, outliers["Data Y"], color="red")
-    # plt.title("Outliers Detected From Original Set")
-    # plt.xlabel("Data Point X Value")
-    # plt.ylabel("Data Point Y Value")
-    # plt.show()
+    if show:
+        plt.scatter(non_outliers[non_outliers.columns[0]].values, non_outliers[non_outliers.columns[1]], color="green")
+        plt.scatter(outliers[outliers.columns[0]].values, outliers[outliers.columns[1]], color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
 
-    assert len(non_outliers["Data X"].values) == 80
-    assert len(outliers["Data X"].values) == 24
+    assert len(non_outliers[non_outliers.columns[0]].values) == 75
+    assert len(outliers[outliers.columns[0]].values) == 29
 
-    # exit(0)
+    return True
+
+
+def test_method2(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5}
+    """
+
+    data_df = data_df_2d.copy()
+
+    if show:
+        plt.scatter(data_df[data_df.columns[0]].values, data_df[data_df.columns[1]], color="blue")
+        plt.title("Original Data Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
+
+    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5}
+
+    non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
+
+    if show:
+        plt.scatter(non_outliers[non_outliers.columns[0]].values, non_outliers[non_outliers.columns[1]], color="green")
+        plt.scatter(outliers[outliers.columns[0]].values, outliers[outliers.columns[1]], color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
+
+    assert len(non_outliers[non_outliers.columns[0]].values) == 99
+    assert len(outliers[outliers.columns[0]].values) == 5
+
+    return True
+
+
+def test_method3(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 10}
+    """
+
+    data_df = data_df_2d.copy()
+
+    if show:
+        plt.scatter(data_df[data_df.columns[0]].values, data_df[data_df.columns[1]], color="blue")
+        plt.title("Original Data Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
+
+    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5,
+                      "min_samples": 10}
+
+    non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
+
+    if show:
+        plt.scatter(non_outliers[non_outliers.columns[0]].values, non_outliers[non_outliers.columns[1]], color="green")
+        plt.scatter(outliers[outliers.columns[0]].values, outliers[outliers.columns[1]], color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
+
+    assert len(non_outliers[non_outliers.columns[0]].values) == 63
+    assert len(outliers[outliers.columns[0]].values) == 41
+
+    return True
+
+
+def test_method4(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 1}
+    """
+
+    data_df = data_df_2d.copy()
+
+    if show:
+        plt.scatter(data_df[data_df.columns[0]].values, data_df[data_df.columns[1]], color="blue")
+        plt.title("Original Data Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
+
+    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5,
+                      "min_samples": 1}
+
+    non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
+
+    if show:
+        plt.scatter(non_outliers[non_outliers.columns[0]].values, non_outliers[non_outliers.columns[1]], color="green")
+        plt.scatter(outliers[outliers.columns[0]].values, outliers[outliers.columns[1]], color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
+
+    assert len(non_outliers[non_outliers.columns[0]].values) == 104
+    assert len(outliers[outliers.columns[0]].values) == 0
+
+    return True
+
+
+def test_method5(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5}
+    """
+
+    data_df = data_df_2d.copy()
+
+    if show:
+        plt.scatter(data_df[data_df.columns[0]].values, data_df[data_df.columns[1]], color="blue")
+        plt.title("Original Data Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
+
+    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5,
+                      "min_samples": 5}
+
+    non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
+
+    if show:
+        plt.scatter(non_outliers[non_outliers.columns[0]].values, non_outliers[non_outliers.columns[1]], color="green")
+        plt.scatter(outliers[outliers.columns[0]].values, outliers[outliers.columns[1]], color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 2D")
+        plt.xlabel("Data Point X Value")
+        plt.ylabel("Data Point Y Value")
+        plt.show()
+
+    assert len(non_outliers[non_outliers.columns[0]].values) == 75
+    assert len(outliers[outliers.columns[0]].values) == 29
+
+    return True

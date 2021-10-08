@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Report Generator Files" href="report_generators.html" />
+    <link rel="next" title="Preprocessing Handlers" href="preprocessing_handlers.html" />
     <link rel="prev" title="correct_outliers.py" href="correct_outliers.html" /> 
 </head>
 
@@ -90,10 +90,13 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">identify_outliers.py</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_handlers.html">Preprocessing Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommender_files.html">Recommender Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="report_generators.html">Report Generator Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization.html">Visualization Files</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing Files</a></li>
 </ul>
 
             
@@ -194,15 +197,13 @@ outliers. The z values varies depending on level of outliers.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data_df</strong> – The DataFrame which contains the n dimensional, univariate or multivariate data</p></li>
-<li><p><strong>method_details</strong> – The details we are using for this outlier detection method DBSCAN was taken from</p></li>
+<li><p><strong>method_details</strong> – The details we are using for this outlier detection method DBSCAN was taken from
+sklearn’s library at <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html">https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html</a>.
+Parameters ‘eps’, ‘min_samples’, and ‘algorithm’ are used.</p></li>
 </ul>
 </dd>
-</dl>
-<p>sklearn’s library at <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html">https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html</a>.
-Parameters ‘eps’, ‘min_samples’, and ‘algorithm’ are used.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values.</p>
 </dd>
 </dl>
 <p>This method determines which values are outliers according to the DBSCAN outlier detection method. Once this
@@ -223,11 +224,11 @@ labeled as outliers.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values. The</p>
+<dd class="field-even"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values. The
+parameter ‘cutoff’ is used to determine what cutoff to use for a distance value needed for a point to not be
+considered an outlier.</p>
 </dd>
 </dl>
-<p>parameter ‘cutoff’ is used to determine what cutoff to use for a distance value needed for a point to not be
-considered an outlier.</p>
 <p>This method determines which values are outliers according to the k-NN outlier detection method. Once this
 is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
 original data can then be rebuilt as the index is preserved for the non outliers and outlier data points.
@@ -259,14 +260,12 @@ different parameters depending on the method we are using.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data_df</strong> – The DataFrame which contains the one dimensional, univariate data</p></li>
-<li><p><strong>method_details</strong> – The details we are using for this outlier detection method. The parameter ‘z_value’</p></li>
+<li><p><strong>method_details</strong> – The details we are using for this outlier detection method. The parameter ‘z_value’
+determines which z value to use for this method.</p></li>
 </ul>
 </dd>
-</dl>
-<p>determines which z value to use for this method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Two DataFrames, the first with non outlier values and the second containing all outlier values</p>
 </dd>
 </dl>
 <p>This method determines which values are outliers according to the z-score outlier detection method. Once this
@@ -286,7 +285,7 @@ away from the mean as an outlier.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="report_generators.html" class="btn btn-neutral float-right" title="Report Generator Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="preprocessing_handlers.html" class="btn btn-neutral float-right" title="Preprocessing Handlers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="correct_outliers.html" class="btn btn-neutral float-left" title="correct_outliers.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

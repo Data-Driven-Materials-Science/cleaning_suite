@@ -4,7 +4,6 @@ Null Handler Files
 .. toctree::
    :maxdepth: 4
 
-   correct_nulls_grid
-   correct_nulls_linear
+   correct_nulls
    interpolation_helper
 

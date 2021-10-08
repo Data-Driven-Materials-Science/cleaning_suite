@@ -12,6 +12,7 @@ Welcome to NanomechanicalBackend's documentation!
 
 
    helper_functions
+   testing
 
 
 Indices and tables

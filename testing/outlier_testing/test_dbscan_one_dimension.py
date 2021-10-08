@@ -1,51 +1,193 @@
-import numpy as np
+from testing import testing_data_sets
+
 from helper_functions.outlier_handlers import identify_outliers
 import matplotlib.pyplot as plt
-import pandas as pd
+
+# Import our data sets
+data_df_1d = testing_data_sets.data_df_1d.copy()
+
+intervals = testing_data_sets.one_dimensional_x_intervals.copy()
 
 
-def test_method1():
-    # Tests the z score outlier removal
-    np.random.seed(10)
+def test_method1(show=False):
+    """
 
-    mu, sigma = 0, 1  # mean and standard deviation
-    mu_outliers, sigma_outliers = 20, 1  # mean and standard deviation
-    s = np.random.normal(mu, sigma, 100)
-    outliers = np.random.normal(mu_outliers, sigma_outliers, 4)
-    s = np.append(s, outliers)
+    :param show: Boolean of whether or not to plot the results of the process and the original data
 
-    intervals = []
-    interval_increment = 0.25
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5}
+    """
 
-    accumulator = min(s) - interval_increment
-    max_limit = max(s) + 2 * interval_increment
+    data_df = data_df_1d.copy()
 
-    while accumulator < max_limit:
-        intervals.append(accumulator)
-        accumulator = accumulator + interval_increment
-
-    data_df = pd.DataFrame(s, columns=["Data"])
-
-    # plt.hist(data_df["Data"].values, bins=intervals, color="blue")
-    # plt.title("Original Data Set")
-    # plt.xlabel("Data Point Value")
-    # plt.ylabel("Data Point Frequency")
-    # plt.show()
+    if show:
+        plt.hist(data_df[data_df.columns[0]].values, bins=intervals, color="blue")
+        plt.title("Original Data Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
 
     method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5,
                       "min_samples": 5}
 
-    # print(identify_outliers.return_outliers(data_df=data_df, method_details=method_details))
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
-    # plt.hist(non_outliers["Data"].values, bins=intervals, color="green")
-    # plt.hist(outliers["Data"].values, bins=intervals, color="red")
-    # plt.title("Outliers Detected From Original Set")
-    # plt.xlabel("Data Point Value")
-    # plt.ylabel("Data Point Frequency")
-    # plt.show()
+    if show:
+        plt.hist(non_outliers[non_outliers.columns[0]].values, bins=intervals, color="green")
+        plt.hist(outliers[outliers.columns[0]].values, bins=intervals, color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
 
-    assert len(non_outliers["Data"].values) == 100
-    assert len(outliers["Data"].values) == 4
+    assert len(non_outliers[non_outliers.columns[0]].values) == 100
+    assert len(outliers[outliers.columns[0]].values) == 4
 
-    # exit(0)
+    return True
+
+
+def test_method2(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5}
+    """
+
+    data_df = data_df_1d.copy()
+
+    if show:
+        plt.hist(data_df[data_df.columns[0]].values, bins=intervals, color="blue")
+        plt.title("Original Data Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
+
+    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5}
+
+    non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
+
+    if show:
+        plt.hist(non_outliers[non_outliers.columns[0]].values, bins=intervals, color="green")
+        plt.hist(outliers[outliers.columns[0]].values, bins=intervals, color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
+
+    assert len(non_outliers[non_outliers.columns[0]].values) == 100
+    assert len(outliers[outliers.columns[0]].values) == 4
+
+    return True
+
+
+def test_method3(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 10}
+    """
+
+    data_df = data_df_1d.copy()
+
+    if show:
+        plt.hist(data_df[data_df.columns[0]].values, bins=intervals, color="blue")
+        plt.title("Original Data Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
+
+    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5,
+                      "min_samples": 10}
+
+    non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
+
+    if show:
+        plt.hist(non_outliers[non_outliers.columns[0]].values, bins=intervals, color="green")
+        plt.hist(outliers[outliers.columns[0]].values, bins=intervals, color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
+
+    assert len(non_outliers[non_outliers.columns[0]].values) == 95
+    assert len(outliers[outliers.columns[0]].values) == 9
+
+    return True
+
+
+def test_method4(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 1}
+    """
+
+    data_df = data_df_1d.copy()
+
+    if show:
+        plt.hist(data_df[data_df.columns[0]].values, bins=intervals, color="blue")
+        plt.title("Original Data Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
+
+    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5,
+                      "min_samples": 1}
+
+    non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
+
+    if show:
+        plt.hist(non_outliers[non_outliers.columns[0]].values, bins=intervals, color="green")
+        plt.hist(outliers[outliers.columns[0]].values, bins=intervals, color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
+
+    assert len(non_outliers[non_outliers.columns[0]].values) == 104
+    assert len(outliers[outliers.columns[0]].values) == 0
+
+    return True
+
+
+def test_method5(show=False):
+    """
+
+    :param show: Boolean of whether or not to plot the results of the process and the original data
+
+    Runs DBSCAN detection with the configuration of
+    {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 5}
+    """
+
+    data_df = data_df_1d.copy()
+
+    if show:
+        plt.hist(data_df[data_df.columns[0]].values, bins=intervals, color="blue")
+        plt.title("Original Data Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
+
+    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5,
+                      "min_samples": 5}
+
+    non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
+
+    if show:
+        plt.hist(non_outliers[non_outliers.columns[0]].values, bins=intervals, color="green")
+        plt.hist(outliers[outliers.columns[0]].values, bins=intervals, color="red")
+        plt.title("Outliers Detected From Original Set - DBSCAN 1D")
+        plt.xlabel("Data Point Value")
+        plt.ylabel("Data Point Frequency")
+        plt.show()
+
+    assert len(non_outliers[non_outliers.columns[0]].values) == 100
+    assert len(outliers[outliers.columns[0]].values) == 4
+
+    return True
