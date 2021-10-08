@@ -6,6 +6,8 @@ import pandas as pd
 import numpy as np
 import math
 
+# Derived from example at https://neptune.ai/blog/anomaly-detection-in-time-series
+
 x_values = np.linspace(0.0, math.pi * 4, 100)
 base_values = np.sin(x_values)
 noise_component = np.random.normal(0, 0.1, 100)

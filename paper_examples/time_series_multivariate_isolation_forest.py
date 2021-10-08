@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import math
 import random
+from paper_examples import figure_colors_key as ck
 
 random.seed(0)
 num_points = 500
@@ -33,7 +34,7 @@ for column in data_df.columns:
 
 for column in data_df.columns:
     if column != "X Values" and column != "Total":
-        plt.plot(data_df["X Values"], data_df[column])
+        plt.plot(data_df["X Values"], data_df[column], color=ck.raw_data_color)
         plt.xlabel("X Value")
         plt.ylabel(column)
         plt.title("X Value vs " + column)
@@ -64,37 +65,13 @@ fig, ax = plt.subplots(4, figsize=(20, 12))
 
 columns = ["Component One", "Component Two", "Component Three", "Component Four"]
 for i in range(0, 4):
-    ax[i].plot(data_df.index, data_df[str(columns[i])], color="black", label="Normal")
-    ax[i].scatter(a.index, data_df[str(columns[i])][a.index], color="red", label="Anomaly")
+    ax[i].plot(data_df.index, data_df[str(columns[i])], color=ck.raw_data_color, label="Normal")
+    ax[i].scatter(a.index, data_df[str(columns[i])][a.index], color=ck.outlier_color, label="Anomaly")
     ax[i].set_xlabel("Point Index")
     ax[i].set_ylabel(str(columns[i]))
     ax[i].legend()
     ax[i].set_title("Time Series Outlier Detection Using Isolation Forest - " + str(columns[i]))
 
-# ax[0].plot(data_df.index, data_df['Component One'], color='black', label='Normal')
-# ax[1].plot(data_df.index, data_df['Component Two'], color='black', label='Normal')
-# ax[2].plot(data_df.index, data_df['Component Three'], color='black', label='Normal')
-# ax[3].plot(data_df.index, data_df['Component Four'], color='black', label='Normal')
-# ax[0].scatter(a.index, data_df['Component One'][a.index], color='red', label='Anomaly')
-# ax[1].scatter(a.index, data_df['Component Two'][a.index], color='red', label='Anomaly')
-# ax[2].scatter(a.index, data_df['Component Three'][a.index], color='red', label='Anomaly')
-# ax[3].scatter(a.index, data_df['Component Four'][a.index], color='red', label='Anomaly')
-# ax[0].set_xlabel("Point Index")
-# ax[1].set_xlabel("Point Index")
-# ax[2].set_xlabel("Point Index")
-# ax[3].set_xlabel("Point Index")
-# ax[0].set_ylabel("Component One")
-# ax[1].set_ylabel("Component Two")
-# ax[2].set_ylabel("Component Three")
-# ax[3].set_ylabel("Component Four")
-# ax[0].legend()
-# ax[1].legend()
-# ax[2].legend()
-# ax[3].legend()
-# ax[0].set_title("Time Series Outlier Detection Using Isolation Forest - Component One")
-# ax[1].set_title("Time Series Outlier Detection Using Isolation Forest - Component Two")
-# ax[2].set_title("Time Series Outlier Detection Using Isolation Forest - Component Three")
-# ax[3].set_title("Time Series Outlier Detection Using Isolation Forest - Component Four")
 plt.tight_layout(h_pad=3.0)
 plt.savefig("./paper_images/IsolationForestOutlierDetectionResults", dpi=500)
 plt.show()
