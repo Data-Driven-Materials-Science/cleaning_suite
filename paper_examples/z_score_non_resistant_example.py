@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from helper_functions.outlier_handlers import identify_outliers
 import matplotlib.pyplot as plt
+from paper_examples import figure_colors_key as ck
 
 np.random.seed(10)
 
@@ -26,7 +27,7 @@ while accumulator < max_limit:
     one_dimensional_x_intervals.append(accumulator)
     accumulator = accumulator + interval_increment
 
-plt.hist(data_df_1d[data_df_1d.columns[0]].values, bins=one_dimensional_x_intervals, color="blue", width=500)
+plt.hist(data_df_1d[data_df_1d.columns[0]].values, bins=one_dimensional_x_intervals, color=ck.raw_data_color, width=500)
 plt.title("Original Data Set - Z-Score Outlier Detection")
 plt.xlabel("Data Point Value")
 plt.ylabel("Data Point Frequency")
@@ -37,10 +38,10 @@ method_details = {"method_name": "z-score", "z_value": 3, "is_univariate": True}
 
 non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df_1d, method_details=method_details)
 
-plt.hist(non_outliers[non_outliers.columns[0]].values, bins=one_dimensional_x_intervals, color="green",
-         label="Not Outliers", width=500)
-plt.hist(outliers[outliers.columns[0]].values, bins=one_dimensional_x_intervals, color="red", label="Outliers",
-         width=500)
+plt.hist(non_outliers[non_outliers.columns[0]].values, bins=one_dimensional_x_intervals,
+         color=ck.resulting_data_colors[0], label="Not Outliers", width=500)
+plt.hist(outliers[outliers.columns[0]].values, bins=one_dimensional_x_intervals, color=ck.outlier_color,
+         label="Outliers", width=500)
 plt.title("Outliers Detected From Original Set - Z-Score Outlier Detection")
 plt.xlabel("Data Point Value")
 plt.ylabel("Data Point Frequency")

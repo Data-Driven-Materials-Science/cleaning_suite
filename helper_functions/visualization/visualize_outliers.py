@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def visualize_outliers(data_df, outlier_df, bars=True, diff_colors=True, show=True, save=False, title=""):
+def visualize_outliers(data_df, outlier_df, bars=True, diff_colors=True, show=True, save=False, title="",
+                       multiple_hists=False):
     """
 
     :param data_df: A DataFrame which holds all of the data we will be detecting outliers in
@@ -15,6 +16,8 @@ def visualize_outliers(data_df, outlier_df, bars=True, diff_colors=True, show=Tr
     :param show: A boolean of whether or not to show the plot (primarily used for testing)
     :param save: A boolean of whether or not to save the plot
     :param title: A String title to use for the plot
+    :param multiple_hists: A boolean of whether or not to have multiple histograms for the 1 or n dimensional
+        visualization
 
     :return: None
 
@@ -37,12 +40,14 @@ def visualize_outliers(data_df, outlier_df, bars=True, diff_colors=True, show=Tr
     else:
         for column in data_df.columns:
             visualize_outliers_1d(data_df=data_df, outlier_df=outlier_df, column=column, bars=bars,
-                                  diff_colors=diff_colors, show=show, save=save, title=title)
+                                  diff_colors=diff_colors, show=show, save=save, title=title,
+                                  multiple_hists=multiple_hists)
 
     return None
 
 
-def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=True, show=True, save=False, title=""):
+def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=True, show=True, save=False, title="",
+                          multiple_hists=False):
     """
 
     :param data_df: A DataFrame which holds all of the data we will be detecting outliers in
@@ -56,6 +61,8 @@ def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=Tr
     :param show: A boolean of whether or not to show the plot (primarily used for testing)
     :param save: A boolean of whether or not to save the plot
     :param title: A String title to use for the plot
+    :param multiple_hists: A boolean of whether or not to have multiple histograms for the 1 or n dimensional
+        visualization
 
     :return: None
 
@@ -81,10 +88,39 @@ def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=Tr
         intervals.append(accumulator)
         accumulator = accumulator + interval_increment
 
-    plt.hist(data_df[column].values, bins=intervals, color="green")
     if diff_colors:
-        plt.hist(outlier_df[column].values, bins=intervals, color="red")
+
+        # Alternate method to possibly look into in the future...
+        # data_combined = [data_df[column].values, outlier_df[column].values]
+        # colors = ["green", "red"]
+        # labels = ["Not Outliers", "Outliers"]
+        # plt.hist(data_combined, bins=intervals, histtype="bar", color=colors, label=labels)
+
+        # Another alternate version
+        # data_combined = [data_df[column].values, outlier_df[column].values]
+        # colors = ["green", "red"]
+        # labels = ["Not Outliers", "Outliers"]
+        # plt.hist(data_combined, bins=intervals, histtype="step", fill=True, color=colors, label=labels)
+
+        if True:
+            fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(10, 10))
+            ax_normal_data = axes[0]
+            ax_outliers = axes[1]
+            ax_combined = axes[2]
+            ax_normal_data.hist(data_df[column].values, bins=intervals, histtype="bar", color="green",
+                                label="Not Outliers")
+            ax_outliers.hist(outlier_df[column].values, bins=intervals, histtype="bar", color="red", label="Outliers")
+            ax_combined.hist(data_df[column].values, bins=intervals, histtype="bar", color="green",
+                             label="Not Outliers")
+            ax_combined.hist(outlier_df[column].values, bins=intervals, histtype="bar", color="red", label="Outliers")
+            print(axes)
+            pass
+        else:
+            plt.hist(data_df[column].values, bins=intervals, histtype="bar", color="green", label="Not Outliers")
+            plt.hist(outlier_df[column].values, bins=intervals, histtype="bar", color="red", label="Outliers")
+        plt.legend()
     else:
+        plt.hist(data_df[column].values, bins=intervals, color="green")
         plt.hist(outlier_df[column].values, bins=intervals, color="green")
 
     if bars:
@@ -133,11 +169,12 @@ def visualize_outliers_2d(data_df, outlier_df, diff_colors=True, show=True, save
 
     data_cols = data_df.columns
 
-    plt.scatter(data_df[data_cols[0]].values, data_df[data_cols[1]], color="green")
     if diff_colors:
-        plt.scatter(outlier_df[data_cols[0]].values, outlier_df[data_cols[1]], color="green")
+        plt.scatter(data_df[data_cols[0]].values, data_df[data_cols[1]], color="green", label="Not Outliers")
+        plt.scatter(outlier_df[data_cols[0]].values, outlier_df[data_cols[1]], color="red", label="Outliers")
     else:
-        plt.scatter(outlier_df[data_cols[0]].values, outlier_df[data_cols[1]], color="red")
+        plt.scatter(data_df[data_cols[0]].values, data_df[data_cols[1]], color="green")
+        plt.scatter(outlier_df[data_cols[0]].values, outlier_df[data_cols[1]], color="green")
     plt.title(title)
     plt.xlabel("Data Point Value For " + str(data_cols[0]))
     plt.ylabel("Data Point Value For " + str(data_cols[1]))

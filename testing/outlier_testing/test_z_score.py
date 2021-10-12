@@ -25,7 +25,7 @@ def test_method1(show=False):
         plt.ylabel("Data Point Frequency")
         plt.show()
 
-    method_details = {"method_name": "z-score", "z_value": 0.1, "is_univariate": True}
+    method_details = {"method_name": "z-score", "z_value": 0.1, "is_univariate": True, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -60,7 +60,7 @@ def test_method2(show=False):
         plt.ylabel("Data Point Frequency")
         plt.show()
 
-    method_details = {"method_name": "z-score", "z_value": 1, "is_univariate": True}
+    method_details = {"method_name": "z-score", "z_value": 1, "is_univariate": True, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -95,7 +95,7 @@ def test_method3(show=False):
         plt.ylabel("Data Point Frequency")
         plt.show()
 
-    method_details = {"method_name": "z-score", "z_value": 2, "is_univariate": True}
+    method_details = {"method_name": "z-score", "z_value": 2, "is_univariate": True, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -130,7 +130,7 @@ def test_method4(show=False):
         plt.ylabel("Data Point Frequency")
         plt.show()
 
-    method_details = {"method_name": "z-score", "z_value": 3, "is_univariate": True}
+    method_details = {"method_name": "z-score", "z_value": 3, "is_univariate": True, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 

@@ -26,7 +26,7 @@ def test_method1(show=False):
         plt.show()
 
     method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5,
-                      "min_samples": 5}
+                      "min_samples": 5, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -62,7 +62,8 @@ def test_method2(show=False):
         plt.ylabel("Data Point Y Value")
         plt.show()
 
-    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5}
+    method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5,
+                      "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -99,7 +100,7 @@ def test_method3(show=False):
         plt.show()
 
     method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5,
-                      "min_samples": 10}
+                      "min_samples": 10, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -136,7 +137,7 @@ def test_method4(show=False):
         plt.show()
 
     method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5,
-                      "min_samples": 1}
+                      "min_samples": 1, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -173,7 +174,7 @@ def test_method5(show=False):
         plt.show()
 
     method_details = {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5,
-                      "min_samples": 5}
+                      "min_samples": 5, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 

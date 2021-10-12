@@ -27,7 +27,7 @@ def test_method1(show=False):
         plt.ylabel("Data Point Frequency")
         plt.show()
 
-    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.15}
+    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.15, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -63,7 +63,7 @@ def test_method2(show=False):
         plt.ylabel("Data Point Frequency")
         plt.show()
 
-    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.25}
+    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.25, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -99,7 +99,7 @@ def test_method3(show=False):
         plt.ylabel("Data Point Frequency")
         plt.show()
 
-    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.35}
+    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.35, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
@@ -135,7 +135,7 @@ def test_method4(show=False):
         plt.ylabel("Data Point Frequency")
         plt.show()
 
-    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.45}
+    method_details = {"method_name": "knn", "is_univariate": False, "cut_off": 0.45, "time_series": False}
 
     non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 

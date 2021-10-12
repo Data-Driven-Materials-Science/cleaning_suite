@@ -52,8 +52,9 @@ def test_method1(show=False):
     {"method_name": "knn", "is_univariate": False, "cut_off": 0.15}
     """
 
-    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.15}, show=show,
-                              outlier_num=52, non_outlier_num=52)
+    return helper_test_method(
+        method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.15, "time_series": False}, show=show,
+        outlier_num=52, non_outlier_num=52)
 
 
 def test_method2(show=False):
@@ -65,8 +66,9 @@ def test_method2(show=False):
     {"method_name": "knn", "is_univariate": False, "cut_off": 0.25}
     """
 
-    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.25}, show=show,
-                              outlier_num=24, non_outlier_num=80)
+    return helper_test_method(
+        method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.25, "time_series": False}, show=show,
+        outlier_num=24, non_outlier_num=80)
 
 
 def test_method3(show=False):
@@ -78,8 +80,9 @@ def test_method3(show=False):
     {"method_name": "knn", "is_univariate": False, "cut_off": 0.35}
     """
 
-    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.35}, show=show,
-                              outlier_num=20, non_outlier_num=84)
+    return helper_test_method(
+        method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.35, "time_series": False}, show=show,
+        outlier_num=20, non_outlier_num=84)
 
 
 def test_method4(show=False):
@@ -91,8 +94,9 @@ def test_method4(show=False):
     {"method_name": "knn", "is_univariate": False, "cut_off": 0.45}
     """
 
-    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.45}, show=show,
-                              outlier_num=11, non_outlier_num=93)
+    return helper_test_method(
+        method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.45, "time_series": False}, show=show,
+        outlier_num=11, non_outlier_num=93)
 
 
 def test_method5(show=False):
@@ -104,8 +108,9 @@ def test_method5(show=False):
     {"method_name": "knn", "is_univariate": False, "cut_off": 0.55}
     """
 
-    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.55}, show=show,
-                              outlier_num=7, non_outlier_num=97)
+    return helper_test_method(
+        method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.55, "time_series": False}, show=show,
+        outlier_num=7, non_outlier_num=97)
 
 
 def test_method6(show=False):
@@ -117,5 +122,6 @@ def test_method6(show=False):
     {"method_name": "knn", "is_univariate": False, "cut_off": 0.65}
     """
 
-    return helper_test_method(method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.65}, show=show,
-                              outlier_num=6, non_outlier_num=98)
+    return helper_test_method(
+        method_details={"method_name": "knn", "is_univariate": False, "cut_off": 0.65, "time_series": False}, show=show,
+        outlier_num=6, non_outlier_num=98)

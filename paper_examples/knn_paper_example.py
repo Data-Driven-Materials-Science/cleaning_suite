@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.neighbors import NearestNeighbors
+from paper_examples import figure_colors_key as ck
 
 # Based on example from https://towardsdatascience.com/k-nearest-neighbors-knn-for-anomaly-detection-fdf8ee160d13
 
@@ -24,7 +25,7 @@ data_df_2d["Data X"] = s_x
 data_df_2d["Data Y"] = s_y
 
 # Raw Data Being Plotted
-plt.scatter(data_df_2d["Data X"], data_df_2d["Data Y"], color="b")
+plt.scatter(data_df_2d["Data X"], data_df_2d["Data Y"], color=ck.raw_data_color)
 plt.title("Raw Data Values")
 plt.xlabel("Data Point X Values")
 plt.ylabel("Data Point Y Values")
@@ -43,7 +44,7 @@ knn_model.fit(data_array)
 distances, indexes = knn_model.kneighbors(data_array)
 
 # Plot the distance threshold needed for each point to be marked as not an outlier
-plt.plot(data_df_2d.index, distances.mean(axis=1), color="g")
+plt.plot(data_df_2d.index, distances.mean(axis=1), color=ck.resulting_data_colors[0])
 plt.title("k-NN Distance Values")
 plt.ylabel("Distance Values (d)")
 plt.xlabel("Point Index")
@@ -58,9 +59,9 @@ outlier_index = np.where(distances.mean(axis=1) > cutoff)
 outlier_values = data_df_2d.iloc[outlier_index]
 
 # plot data
-plt.scatter(data_df_2d["Data X"], data_df_2d["Data Y"], color="b", label="Non Outliers")
+plt.scatter(data_df_2d["Data X"], data_df_2d["Data Y"], color=ck.resulting_data_colors[1], label="Non Outliers")
 # plot outlier values
-plt.scatter(outlier_values["Data X"], outlier_values["Data Y"], color="r", label="Outliers")
+plt.scatter(outlier_values["Data X"], outlier_values["Data Y"], color=ck.outlier_color, label="Outliers")
 plt.title("Non Outliers vs Outliers")
 plt.xlabel("Data Point X Values")
 plt.ylabel("Data Point Y Values")

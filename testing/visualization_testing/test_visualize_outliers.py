@@ -18,10 +18,10 @@ def test_z_score_1d(show=False):
 
     """
 
-    method_details = [{"method_name": "z-score", "z_value": 0.1, "is_univariate": True},
-                      {"method_name": "z-score", "z_value": 1, "is_univariate": True},
-                      {"method_name": "z-score", "z_value": 2, "is_univariate": True},
-                      {"method_name": "z-score", "z_value": 3, "is_univariate": True},
+    method_details = [{"method_name": "z-score", "z_value": 0.1, "is_univariate": True, "time_series": False},
+                      {"method_name": "z-score", "z_value": 1, "is_univariate": True, "time_series": False},
+                      {"method_name": "z-score", "z_value": 2, "is_univariate": True, "time_series": False},
+                      {"method_name": "z-score", "z_value": 3, "is_univariate": True, "time_series": False},
                       ]
     for method_detail_individual in method_details:
         non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df_1d.copy(),
@@ -43,8 +43,9 @@ def test_boxplot_1d(show=False):
 
     """
 
-    method_details = [{"method_name": "boxplot", "outlier_type": "mild", "is_univariate": True},
-                      {"method_name": "boxplot", "outlier_type": "extreme", "is_univariate": True},
+    method_details = [{"method_name": "boxplot", "outlier_type": "mild", "is_univariate": True, "time_series": False},
+                      {"method_name": "boxplot", "outlier_type": "extreme", "is_univariate": True,
+                       "time_series": False},
                       ]
     for method_detail_individual in method_details:
         non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df_1d.copy(),
@@ -67,11 +68,16 @@ def test_DBSCAN_1d(show=False):
     """
 
     method_details = [
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 10},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 1},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 5},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 10,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 1,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 5,
+         "time_series": False},
     ]
 
     for method_detail_individual in method_details:
@@ -95,11 +101,16 @@ def test_DBSCAN_2d(show=False):
     """
 
     method_details = [
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 10},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 1},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 5},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 10,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 1,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 5,
+         "time_series": False},
     ]
 
     for method_detail_individual in method_details:
@@ -122,11 +133,16 @@ def test_DBSCAN_3d(show=False):
     """
 
     method_details = [
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 10},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 1},
-        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 5},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 5,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 1, "min_samples": 5,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "auto", "eps": 0.5, "min_samples": 10,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 1,
+         "time_series": False},
+        {"method_name": "dbscan", "is_univariate": False, "algorithm": "ball_tree", "eps": 0.5, "min_samples": 5,
+         "time_series": False},
     ]
 
     for method_detail_individual in method_details:
@@ -150,10 +166,10 @@ def test_KNN_1d(show=False):
     """
 
     method_details = [
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.15},
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.25},
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.35},
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.45},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.15, "time_series": False},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.25, "time_series": False},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.35, "time_series": False},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.45, "time_series": False},
     ]
 
     for method_detail_individual in method_details:
@@ -177,10 +193,10 @@ def test_KNN_2d(show=False):
     """
 
     method_details = [
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.15},
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.25},
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.35},
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.45},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.15, "time_series": False},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.25, "time_series": False},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.35, "time_series": False},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.45, "time_series": False},
     ]
 
     for method_detail_individual in method_details:
@@ -204,10 +220,10 @@ def test_KNN_3d(show=False):
     """
 
     method_details = [
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.15},
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.25},
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.35},
-        {"method_name": "knn", "is_univariate": False, "cut_off": 0.45},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.15, "time_series": False},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.25, "time_series": False},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.35, "time_series": False},
+        {"method_name": "knn", "is_univariate": False, "cut_off": 0.45, "time_series": False},
     ]
 
     for method_detail_individual in method_details:
