@@ -25,7 +25,7 @@ def test_bar_graph_null_values(show=False):
     Test 1 bar graph visual of null values
 
     """
-    sort = ['None', 'ascending', 'descending']
+    sort = [None, 'ascending', 'descending']
     color = ['dimgray', 'red', 'blue', 'black']
     filters = ['None', 'top', 'bottom']
     n = [0, 5, 5]
@@ -49,7 +49,7 @@ def test_matrix_null_values(show=False):
     Test 1 matrix visual of null values
 
     """
-    sort = ['None', 'ascending', 'descending']
+    sort = [None, 'ascending', 'descending']
     color = [(0,0,0.9), (0,0,0), (0.9,0,0), (0,0.9,0), (0.5,0.5,0.5)]
     filters = ['None', 'top', 'bottom']
     n = [0, 5, 5]
