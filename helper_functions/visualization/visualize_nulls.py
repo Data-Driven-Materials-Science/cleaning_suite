@@ -78,13 +78,18 @@ def generate_nulls_bar_graph(data, color='dimgray', filter=None, n=0, p=0, sort=
     - Actually, filter could be used to grab the 10 most null columns if we wanted to
     - n,p: only useful if filter is used
     '''
-
+    if sort == None:
+        return missingno.bar(data, color=color, filter=filter, n=n, p=p)
     return missingno.bar(data, sort=sort, color=color, filter=filter, n=n, p=p)
 
 def generate_nulls_matrix(data, filter=None, n=0, p=0, sort=None, figsize=(25, 10), fontsize=16, color=(0.25, 0.25, 0.25)):
+    if sort == None:
+        return missingno.matrix(data, filter=filter, p=p, n=n, color=color, figsize=figsize, fontsize=fontsize)
     return missingno.matrix(data, filter=filter, p=p, n=n, color=color, sort=sort, figsize=figsize, fontsize=fontsize)
 
 def generate_nulls_correlation_matrix(data, filter=None, n=0, p=0, sort=None, figsize=(20,12), fontsize=16, cmap='RdBu'):
+    if sort == None:
+        return missingno.heatmap(data, filter=filter, n=n, p=p, cmap=cmap, figsize=figsize, fontsize=fontsize)
     return missingno.heatmap(data, filter=filter, n=n, p=p, sort=sort, cmap=cmap, figsize=figsize, fontsize=fontsize)
 
 def generate_nulls_dendrogram(data, method='average', filter=None, n=0, p=0):
