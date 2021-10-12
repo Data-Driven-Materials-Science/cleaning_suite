@@ -1,3 +1,10 @@
+import pandas as pd
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer
+from missingpy import MissForest
+
+from helper_functions.null_handlers.interpolation_helper import *
+
 def correct_nulls_all(data_df, method, x_df=None, y_df=None, drop_columns=False, threshold=0.3):
     """
 
@@ -11,7 +18,8 @@ def correct_nulls_all(data_df, method, x_df=None, y_df=None, drop_columns=False,
 
     :return: The corrected data as a DataFrame
 
-    Corrects the nulls in the data DataFrame in every column.
+    This method is the MAIN driver of null correction. The recommendations will be called from here, and
+    the proper technique will also be called from this method.
 
     """
 
@@ -35,39 +43,35 @@ def correct_nulls_all(data_df, method, x_df=None, y_df=None, drop_columns=False,
     return None
 
 
-def correct_nulls_grid_interpolation(data_df, x_df, y_df, col_name):
+def correct_nulls_grid_interpolation(data_df, x_df, y_df):
     """
 
     :param data_df: A DataFrame of data
     :param x_df: A DataFrame of x values
     :param y_df: A DataFrame of y values
-    :param col_name: The name of the column we are interpolating or changing at the moment
 
     :return: The corrected data as a DataFrame
 
-    Corrects the nulls in the data DataFrame in the col_name column using interpolation. This data must conform
-    to a grid format.
+    Corrects the nulls in the data DataFrame
 
     """
 
-    return None
+    num_x_vals = len(np.unique(x_df["Data"]))
+    num_y_vals = len(np.unique(y_df["Data"]))
 
+    assert num_x_vals > 0 and num_y_vals > 0
 
-def correct_nulls_average(data_df, col_name):
-    """
+    # Store values in an array
+    data_1d = data_df["Data"].values
 
-    :param data_df: A DataFrame of data
-    :param col_name: The name of the column we are interpolating or changing at the moment
+    # Complete the first interpolation step
+    interpolation_result_one = complete_interpolation(data_1d, x_df, y_df, "cubic")
 
-    :return: The corrected data as a DataFrame
+    interpolation_result_two = complete_interpolation(interpolation_result_one, x_df, y_df, "nearest")
 
-    Corrects the nulls in the data DataFrame in the col_name column using the average of all of the values.
+    ret_df = pd.DataFrame(interpolation_result_two, columns=["Data"])
 
-    """
-
-    # TODO
-
-    return None
+    return ret_df
 
 
 def correct_nulls_linear_remove(data_df):
@@ -85,5 +89,26 @@ def correct_nulls_linear_remove(data_df):
 
     return None
 
-# TODO research other methods for handling nulls
-# TODO Research if there is a situation where a grid can have rows or columns removed
+def remove_monotone_columns(data):
+    # Keeps track of the columns that contain more than 1 unique value
+    columns_to_keep = []
+    for col in data.columns:
+        unique_values = data[col].unique()
+
+        # If the column only contains one value, add it for removal
+        if len(unique_values) != 1:
+            columns_to_keep.append(col)
+
+    return data[columns_to_keep]
+
+def mice_null_imputer(data):
+    data = remove_monotone_columns(data)
+    mice_imputer = IterativeImputer(sample_posterior=True)
+    imputed_data = mice_imputer.fit(data).transform(data)
+    return pd.DataFrame(imputed_data, columns=data.columns)
+
+
+def miss_forest_null_imputer(data):
+    miss_forest_imputer = MissForest()
+    imputed_data = miss_forest_imputer.fit(data).transform(data)
+    return imputed_data
