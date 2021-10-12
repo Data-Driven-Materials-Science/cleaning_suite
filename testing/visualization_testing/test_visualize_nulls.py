@@ -110,11 +110,3 @@ def test_dendrogram_null_values(show=False):
                 plt.show()
                 plt.close()
     return True
-
-
-test_bar_graph_null_values(show=True)
-test_matrix_null_values(show=True)
-test_correlation_matrix_null_values(show=True)
-test_dendrogram_null_values(show=True)
-
-exit(0)
