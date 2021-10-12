@@ -22,54 +22,53 @@ def helper_for_testing(data_set_df, method_details, non_outlier_len, outliers_le
 
 def test_method1():
     data_df = df_time_series_four_component.copy()
-    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True}
-    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=334, outliers_len=166)
+    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True, "random_state": 0}
+    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=312, outliers_len=188)
 
 
 def test_method2():
     data_df = df_time_series_four_component.copy().drop(["Component One"], axis=1)
-    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True}
-    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=316, outliers_len=184)
+    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True, "random_state": 0}
+    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=337, outliers_len=163)
 
 
 def test_method3():
     data_df = df_time_series_four_component.copy().drop(["Component Two"], axis=1)
-    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True}
-    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=347, outliers_len=153)
+    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True, "random_state": 0}
+    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=349, outliers_len=151)
 
 
 def test_method4():
     data_df = df_time_series_four_component.copy().drop(["Component Three"], axis=1)
-    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True}
-    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=362, outliers_len=138)
+    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True, "random_state": 0}
+    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=360, outliers_len=140)
 
 
 def test_method5():
     data_df = df_time_series_four_component.copy().drop(["Component Four"], axis=1)
-    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True}
-    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=199, outliers_len=301)
+    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True, "random_state": 0}
+    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=195, outliers_len=305)
 
 
 def test_method6():
     data_df = df_time_series_four_component.copy().drop(["Component Four", "Component Two", "Component Three"], axis=1)
-    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True}
-    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=181, outliers_len=319)
+    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True, "random_state": 0}
+    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=231, outliers_len=269)
 
 
 def test_method7():
     data_df = df_time_series_four_component.copy().drop(["Component One", "Component Four", "Component Three"], axis=1)
-    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True}
-    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=236, outliers_len=264)
+    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True, "random_state": 0}
+    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=266, outliers_len=234)
 
 
 def test_method8():
     data_df = df_time_series_four_component.copy().drop(["Component One", "Component Two", "Component Four"], axis=1)
-    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True}
-    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=295, outliers_len=205)
+    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True, "random_state": 0}
+    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=270, outliers_len=230)
 
 
 def test_method9():
     data_df = df_time_series_four_component.copy().drop(["Component One", "Component Two", "Component Three"], axis=1)
-    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True}
-    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=395, outliers_len=105)
-
+    method_details = {"method_name": "isolation_forest", "is_univariate": False, "time_series": True, "random_state": 0}
+    helper_for_testing(data_set_df=data_df, method_details=method_details, non_outlier_len=402, outliers_len=98)

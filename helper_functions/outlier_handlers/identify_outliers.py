@@ -221,7 +221,10 @@ def isolation_forest_method(data_df, method_details):
     np_scaled = scaler.fit_transform(resulting_data_set.reshape(-1, len(data_df_copy.columns)))
     data = pd.DataFrame(np_scaled)
     # Train the isolation forest model
-    model = IsolationForest()
+    if "random_state" in method_details.keys():
+        model = IsolationForest(random_state=method_details["random_state"])
+    else:
+        model = IsolationForest()
     model.fit(data)
 
     data_df_copy["anomaly"] = model.predict(data)
