@@ -73,7 +73,7 @@ def test_correlation_matrix_null_values(show=False):
     Test 1 correlation matrix visual of null values
 
     """
-    sort = ['None', 'ascending', 'descending']
+    sort = [None, 'ascending', 'descending']
     color = ['PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu',
             'RdYlBu', 'RdYlGn', 'Spectral', 'coolwarm', 'bwr', 'seismic']
     filters = ['None', 'top', 'bottom']
