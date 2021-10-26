@@ -18,7 +18,7 @@ def test_z_score_1d(show=False):
 
     """
 
-    method_details = [{"method_name": "z-score", "z_value": 0.1, "is_univariate": True, "time_series": False},
+    method_details = [{"method_name": "z-score", "z_value": 0.1, "is_univariate": True, "time_series": False, },
                       {"method_name": "z-score", "z_value": 1, "is_univariate": True, "time_series": False},
                       {"method_name": "z-score", "z_value": 2, "is_univariate": True, "time_series": False},
                       {"method_name": "z-score", "z_value": 3, "is_univariate": True, "time_series": False},
@@ -28,8 +28,9 @@ def test_z_score_1d(show=False):
                                                                    method_details=method_detail_individual)
         for bars in [True, False]:
             for diff_colors in [True, False]:
-                visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
-                                                      show=show, title="Z Score Test")
+                for mult_hists in [True, False]:
+                    visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
+                                                          show=show, title="Z Score Test", multiple_hists=mult_hists)
 
     return True
 
@@ -52,8 +53,9 @@ def test_boxplot_1d(show=False):
                                                                    method_details=method_detail_individual)
         for bars in [True, False]:
             for diff_colors in [True, False]:
-                visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
-                                                      show=show, title="Boxplot Test")
+                for mult_hists in [True, False]:
+                    visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
+                                                          show=show, title="Boxplot Test", multiple_hists=mult_hists)
 
     return True
 
@@ -85,8 +87,9 @@ def test_DBSCAN_1d(show=False):
                                                                    method_details=method_detail_individual)
         for bars in [True, False]:
             for diff_colors in [True, False]:
-                visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
-                                                      show=show, title="DBSCAN 1D Test")
+                for mult_hists in [True, False]:
+                    visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
+                                                          show=show, title="DBSCAN 1D Test", multiple_hists=mult_hists)
 
     return True
 
@@ -117,8 +120,9 @@ def test_DBSCAN_2d(show=False):
         non_outliers, outliers = identify_outliers.return_outliers(data_df=data_df_2d.copy(),
                                                                    method_details=method_detail_individual)
         for diff_colors in [True, False]:
-            visualize_outliers.visualize_outliers(non_outliers, outliers, bars=False, diff_colors=diff_colors,
-                                                  show=show, title="DBSCAN 2D Test")
+            for mult_hists in [True, False]:
+                visualize_outliers.visualize_outliers(non_outliers, outliers, bars=False, diff_colors=diff_colors,
+                                                      show=show, title="DBSCAN 2D Test", multiple_hists=mult_hists)
 
     return True
 
@@ -150,8 +154,9 @@ def test_DBSCAN_3d(show=False):
                                                                    method_details=method_detail_individual)
         for bars in [True, False]:
             for diff_colors in [True, False]:
-                visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
-                                                      show=show, title="DBSCAN 3D Test")
+                for mult_hists in [True, False]:
+                    visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
+                                                          show=show, title="DBSCAN 3D Test", multiple_hists=mult_hists)
 
     return True
 
@@ -177,8 +182,9 @@ def test_KNN_1d(show=False):
                                                                    method_details=method_detail_individual)
         for bars in [True, False]:
             for diff_colors in [True, False]:
-                visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
-                                                      show=show, title="k-NN 1D Test")
+                for mult_hists in [True, False]:
+                    visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
+                                                          show=show, title="k-NN 1D Test", multiple_hists=mult_hists)
 
     return True
 
@@ -204,8 +210,9 @@ def test_KNN_2d(show=False):
                                                                    method_details=method_detail_individual)
         for bars in [True, False]:
             for diff_colors in [True, False]:
-                visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
-                                                      show=show, title="k-NN 2D Test")
+                for mult_hists in [True, False]:
+                    visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
+                                                          show=show, title="k-NN 2D Test", multiple_hists=mult_hists)
 
     return True
 
@@ -231,7 +238,8 @@ def test_KNN_3d(show=False):
                                                                    method_details=method_detail_individual)
         for bars in [True, False]:
             for diff_colors in [True, False]:
-                visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
-                                                      show=show, title="k-NN 1D Test")
+                for mult_hists in [True, False]:
+                    visualize_outliers.visualize_outliers(non_outliers, outliers, bars=bars, diff_colors=diff_colors,
+                                                          show=show, title="k-NN 1D Test", multiple_hists=mult_hists)
 
     return True
