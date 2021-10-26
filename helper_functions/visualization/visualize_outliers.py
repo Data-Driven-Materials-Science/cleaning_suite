@@ -102,7 +102,7 @@ def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=Tr
         # labels = ["Not Outliers", "Outliers"]
         # plt.hist(data_combined, bins=intervals, histtype="step", fill=True, color=colors, label=labels)
 
-        if True:
+        if multiple_hists:
             fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(10, 10))
             ax_normal_data = axes[0]
             ax_outliers = axes[1]
@@ -113,8 +113,27 @@ def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=Tr
             ax_combined.hist(data_df[column].values, bins=intervals, histtype="bar", color="green",
                              label="Not Outliers")
             ax_combined.hist(outlier_df[column].values, bins=intervals, histtype="bar", color="red", label="Outliers")
-            print(axes)
+
+            # Find the largest y limit so all plots have an equal scale
+            largest_y = max(axes[0].get_ylim()[1], axes[1].get_ylim()[1], axes[2].get_ylim()[1])
+            axes[0].set_ylim([0, largest_y])
+            axes[1].set_ylim([0, largest_y])
+            axes[2].set_ylim([0, largest_y])
+
+            axes[0].set_title(str(title) + " - " + str(column) + " - Non Outliers")
+            axes[1].set_title(str(title) + " - " + str(column) + " - Outliers")
+            axes[2].set_title(str(title) + " - " + str(column) + " - Combined Data")
+
+            axes[0].set_ylabel("Data Point Frequency")
+            axes[1].set_ylabel("Data Point Frequency")
+            axes[2].set_ylabel("Data Point Frequency")
+
+            axes[0].set_xlabel("Data Point Value For " + str(column))
+            axes[1].set_xlabel("Data Point Value For " + str(column))
+            axes[2].set_xlabel("Data Point Value For " + str(column))
+
             pass
+
         else:
             plt.hist(data_df[column].values, bins=intervals, histtype="bar", color="green", label="Not Outliers")
             plt.hist(outlier_df[column].values, bins=intervals, histtype="bar", color="red", label="Outliers")
@@ -128,9 +147,10 @@ def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=Tr
             plt.axvline(max(data_non_outliers))
             plt.axvline(min(data_non_outliers))
 
-    plt.title(str(title) + " - " + str(column))
-    plt.xlabel("Data Point Value For " + str(column))
-    plt.ylabel("Data Point Frequency")
+    if not (multiple_hists and diff_colors):
+        plt.title(str(title) + " - " + str(column))
+        plt.xlabel("Data Point Value For " + str(column))
+        plt.ylabel("Data Point Frequency")
 
     if show:
         plt.show()
