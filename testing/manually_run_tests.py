@@ -2,6 +2,7 @@ from testing.outlier_testing import test_boxplot, test_dbscan_one_dimension, tes
     test_knn_one_dimension, test_knn_two_dimension, test_z_score
 from testing.visualization_testing import test_visualize_outliers
 from testing.report_testing import test_report_outliers
+from testing.file_reading_saving import test_file_reading
 
 # Runs the outlier detection testing for the boxplot outlier detection type
 assert test_boxplot.test_method1(show=True)
@@ -60,5 +61,12 @@ assert test_report_outliers.test_DBSCAN_3d()
 assert test_report_outliers.test_KNN_1d()
 assert test_report_outliers.test_KNN_2d()
 assert test_report_outliers.test_KNN_3d()
+
+assert test_file_reading.test_csv1()
+assert test_file_reading.test_csv2()
+assert test_file_reading.test_csv3()
+assert test_file_reading.test_excel1()
+assert test_file_reading.test_excel2()
+assert test_file_reading.test_excel3()
 
 exit(0)
