@@ -12,9 +12,10 @@ def read_file(filepath):
     """
 
     if ".csv" in filepath:
-        df = pd.read_csv(filepath, index_col=0)
+        df = pd.read_csv(filepath)
     elif ".xlsx" in filepath:
-        df = pd.read_excel(filepath, index_col=0)
+        df = pd.read_excel(filepath)
     else:
         raise ValueError("You provided the wrong file type! We do not support your file type at this moment.")
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
     return df
