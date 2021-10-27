@@ -4,3 +4,5 @@ pandas
 scipy
 sklearn
 missingno
+
+openpyxl
