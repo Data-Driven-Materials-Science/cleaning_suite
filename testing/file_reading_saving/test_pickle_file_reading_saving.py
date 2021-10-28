@@ -3,7 +3,7 @@ from helper_functions.pickle_saving_reading import PickleFileManager as PKM
 from pandas.testing import assert_frame_equal
 
 
-def test_set_one(dir_path="../../datasets/001_data_files_test"):
+def test_set_one(dir_path="datasets/001_data_files_test"):
     """
 
     Test pickle file saving and reading for the 1d Data Set
@@ -26,7 +26,7 @@ def test_set_one(dir_path="../../datasets/001_data_files_test"):
     return True
 
 
-def test_set_two(dir_path="../../datasets/002_data_files_test"):
+def test_set_two(dir_path="datasets/002_data_files_test"):
     """
 
     Test pickle file saving and reading for the 3d Data Set
@@ -49,7 +49,7 @@ def test_set_two(dir_path="../../datasets/002_data_files_test"):
     return True
 
 
-def test_set_three(dir_path="../../datasets/003_data_files_test"):
+def test_set_three(dir_path="datasets/003_data_files_test"):
     """
 
     Test pickle file saving and reading for the data series Data Set
@@ -71,7 +71,3 @@ def test_set_three(dir_path="../../datasets/003_data_files_test"):
 
     return True
 
-
-test_set_one()
-test_set_two()
-test_set_three()
