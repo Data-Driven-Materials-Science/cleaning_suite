@@ -1,5 +1,5 @@
 from testing.outlier_testing import test_boxplot, test_dbscan_one_dimension, test_dbscan_two_dimension, \
-    test_knn_one_dimension, test_knn_two_dimension, test_z_score
+    test_knn_one_dimension, test_knn_two_dimension, test_z_score, test_dbscan_parameter_generation
 from testing.visualization_testing import test_visualize_outliers
 from testing.report_testing import test_report_outliers
 
@@ -60,5 +60,9 @@ assert test_report_outliers.test_DBSCAN_3d()
 assert test_report_outliers.test_KNN_1d()
 assert test_report_outliers.test_KNN_2d()
 assert test_report_outliers.test_KNN_3d()
+
+# Runs the tests for the automated DBSCAN parameter generation
+assert test_dbscan_parameter_generation.test_set_one(show=True)
+assert test_dbscan_parameter_generation.test_set_two(show=True)
 
 exit(0)
