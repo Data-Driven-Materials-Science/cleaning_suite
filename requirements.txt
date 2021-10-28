@@ -4,4 +4,5 @@ pandas
 scipy
 sklearn
 missingno
+kneebow
 openpyxl
