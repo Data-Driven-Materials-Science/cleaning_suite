@@ -2,7 +2,7 @@ from testing.outlier_testing import test_boxplot, test_dbscan_one_dimension, tes
     test_knn_one_dimension, test_knn_two_dimension, test_z_score
 from testing.visualization_testing import test_visualize_outliers
 from testing.report_testing import test_report_outliers
-from testing.file_reading_saving import test_file_reading
+from testing.file_reading_saving import test_file_reading, test_pickle_file_reading_saving
 
 # Runs the outlier detection testing for the boxplot outlier detection type
 assert test_boxplot.test_method1(show=True)
@@ -61,6 +61,11 @@ assert test_report_outliers.test_DBSCAN_3d()
 assert test_report_outliers.test_KNN_1d()
 assert test_report_outliers.test_KNN_2d()
 assert test_report_outliers.test_KNN_3d()
+
+# Runs the pickle file reading and writing tests
+assert test_pickle_file_reading_saving.test_set_one(dir_path="../datasets/001_data_files_test")
+assert test_pickle_file_reading_saving.test_set_two(dir_path="../datasets/002_data_files_test")
+assert test_pickle_file_reading_saving.test_set_three(dir_path="../datasets/003_data_files_test")
 
 # Runs the tests for the file reading manually
 assert test_file_reading.test_csv1(file_path="../datasets/CSVDataFile_1Dimensional.csv")
