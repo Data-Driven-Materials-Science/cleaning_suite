@@ -2,6 +2,7 @@ from testing.outlier_testing import test_boxplot, test_dbscan_one_dimension, tes
     test_knn_one_dimension, test_knn_two_dimension, test_z_score
 from testing.visualization_testing import test_visualize_outliers
 from testing.report_testing import test_report_outliers
+from testing.file_reading_saving import test_file_reading
 
 # Runs the outlier detection testing for the boxplot outlier detection type
 assert test_boxplot.test_method1(show=True)
@@ -60,5 +61,21 @@ assert test_report_outliers.test_DBSCAN_3d()
 assert test_report_outliers.test_KNN_1d()
 assert test_report_outliers.test_KNN_2d()
 assert test_report_outliers.test_KNN_3d()
+
+# Runs the tests for the file reading manually
+assert test_file_reading.test_csv1(file_path="../datasets/CSVDataFile_1Dimensional.csv")
+assert test_file_reading.test_csv2(file_path="../datasets/CSVDataFile_3Dimensional.csv")
+assert test_file_reading.test_csv3(file_path="../datasets/CSVDataFile_TimeSeries.csv")
+assert test_file_reading.test_csv4(file_path="../datasets/CSVDataFile_1Dimensional_Clean.csv")
+assert test_file_reading.test_csv5(file_path="../datasets/CSVDataFile_1Dimensional_Messy.csv")
+assert test_file_reading.test_csv6(file_path="../datasets/CSVDataFile_3Dimensional_Clean.csv")
+assert test_file_reading.test_csv7(file_path="../datasets/CSVDataFile_3Dimensional_Messy.csv")
+assert test_file_reading.test_excel1(file_path="../datasets/ExcelDataFile_1Dimensional.xlsx")
+assert test_file_reading.test_excel2(file_path="../datasets/ExcelDataFile_3Dimensional.xlsx")
+assert test_file_reading.test_excel3(file_path="../datasets/ExcelDataFile_TimeSeries.xlsx")
+assert test_file_reading.test_excel4(file_path="../datasets/ExcelDataFile_1Dimensional_Clean.xlsx")
+assert test_file_reading.test_excel5(file_path="../datasets/ExcelDataFile_1Dimensional_Messy.xlsx")
+assert test_file_reading.test_excel6(file_path="../datasets/ExcelDataFile_3Dimensional_Clean.xlsx")
+assert test_file_reading.test_excel7(file_path="../datasets/ExcelDataFile_3Dimensional_Messy.xlsx")
 
 exit(0)
