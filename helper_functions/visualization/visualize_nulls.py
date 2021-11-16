@@ -51,23 +51,24 @@ def visualize_nulls_grid(data_df, x_df, y_df):
     plt.show()
 
 
-def visualize_nulls_general(data):
+def visualize_nulls_general(data, image_directory="Images/"):
     fig = generate_nulls_bar_graph(data)
-    plt.savefig("Images/Bar_graph_nulls")
+    plt.savefig(image_directory + "Bar_graph_nulls")
     plt.close()
     fig = generate_nulls_matrix(data)
-    plt.savefig("Images/Matrix_nulls")
+    plt.savefig(image_directory + "Matrix_nulls")
     plt.close()
     fig = generate_nulls_correlation_matrix(data)
-    plt.savefig("Images/Correlation_matrix_nulls")
+    plt.savefig(image_directory + "Correlation_matrix_nulls")
     plt.close()
     fig = generate_nulls_dendrogram(data)
-    plt.savefig("Images/Dendrogram_nulls")
+    plt.savefig(image_directory + "Dendrogram_nulls")
     plt.close()
+
 
 def generate_nulls_bar_graph(data, color='dimgray', filter=None, n=0, p=0, sort=None):
     # n and p are only applicable when filter!=None
-    
+
     '''
     Use of params:
     - color: YES
@@ -78,17 +79,22 @@ def generate_nulls_bar_graph(data, color='dimgray', filter=None, n=0, p=0, sort=
     - Actually, filter could be used to grab the 10 most null columns if we wanted to
     - n,p: only useful if filter is used
     '''
-    #if sort == None:
-        #return missingno.bar(data, color=color, filter=filter, n=n, p=p)
+    # if sort == None:
+    # return missingno.bar(data, color=color, filter=filter, n=n, p=p)
     return missingno.bar(data, sort=sort, color=color, filter=filter, n=n, p=p)
 
-def generate_nulls_matrix(data, filter=None, n=0, p=0, sort=None, figsize=(25, 10), fontsize=16, color=(0.25, 0.25, 0.25)):
-    #if sort == None:
-        #return missingno.matrix(data, filter=filter, p=p, n=n, color=color, figsize=figsize, fontsize=fontsize)
+
+def generate_nulls_matrix(data, filter=None, n=0, p=0, sort=None, figsize=(25, 10), fontsize=16,
+                          color=(0.25, 0.25, 0.25)):
+    # if sort == None:
+    # return missingno.matrix(data, filter=filter, p=p, n=n, color=color, figsize=figsize, fontsize=fontsize)
     return missingno.matrix(data, filter=filter, p=p, n=n, color=color, sort=sort, figsize=figsize, fontsize=fontsize)
 
-def generate_nulls_correlation_matrix(data, filter=None, n=0, p=0, sort=None, figsize=(20,12), fontsize=16, cmap='RdBu'):
+
+def generate_nulls_correlation_matrix(data, filter=None, n=0, p=0, sort=None, figsize=(20, 12), fontsize=16,
+                                      cmap='RdBu'):
     return missingno.heatmap(data, filter=filter, n=n, p=p, sort=sort, cmap=cmap, figsize=figsize, fontsize=fontsize)
+
 
 def generate_nulls_dendrogram(data, method='average', filter=None, n=0, p=0):
     return missingno.dendrogram(data, method=method, filter=filter, n=n, p=p)
