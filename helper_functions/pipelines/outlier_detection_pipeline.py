@@ -55,7 +55,7 @@ def run_pipeline(user_id, temp_dir_path="Temp/", time_series=False):
                                       outlier_df=outliers_df)
 
     visualize_outliers.visualize_outliers(data_df=data_df, outlier_df=outliers_df, bars=True, diff_colors=True,
-                                          show=True, save=True, title="Testing123", multiple_hists=True,
+                                          show=False, save=True, title="Testing123", multiple_hists=True,
                                           save_dir=image_save_dir)
 
     return
