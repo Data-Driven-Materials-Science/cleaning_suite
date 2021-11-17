@@ -1,4 +1,10 @@
 import pandas as pd
+
+import sys
+import sklearn.neighbors._base
+
+sys.modules['sklearn.neighbors.base'] = sklearn.neighbors._base
+
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 from missingpy import MissForest
