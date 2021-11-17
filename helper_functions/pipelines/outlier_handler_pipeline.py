@@ -24,8 +24,9 @@ def run_pipeline(user_id, temp_dir_path="Temp/", method="remove"):
 
     if method == "remove":
         data_df.to_csv(dir_path + "final_data.csv", index=False)
-    elif method == "correct":
-        return
+    # This method is not yet implemented and still being decided on how it will function
+    # elif method == "correct":
+    #     return
     elif method == "leave_in":
         combined_df = pd.concat([data_df, outlier_df])
         combined_df = combined_df.sort_index()
