@@ -22,6 +22,11 @@ for name in os.listdir("../helper_functions"):
         # print("../helper_functions/" + str(name))
         sys.path.append(("../helper_functions/" + name))
 
+for name in os.listdir("../testing"):
+    if os.path.isdir("../testing/" + name):
+        # print("../testing/" + str(name))
+        sys.path.append(("../testing/" + name))
+
 
 # -- Project information -----------------------------------------------------
 

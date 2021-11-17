@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def visualize_outliers(data_df, outlier_df, bars=True, diff_colors=True, show=True, save=False, title=""):
+def visualize_outliers(data_df, outlier_df, bars=True, diff_colors=True, show=True, save=False, title="",
+                       multiple_hists=False, save_dir=""):
     """
 
     :param data_df: A DataFrame which holds all of the data we will be detecting outliers in
@@ -15,6 +16,10 @@ def visualize_outliers(data_df, outlier_df, bars=True, diff_colors=True, show=Tr
     :param show: A boolean of whether or not to show the plot (primarily used for testing)
     :param save: A boolean of whether or not to save the plot
     :param title: A String title to use for the plot
+    :param multiple_hists: A boolean of whether or not to have multiple histograms for the 1 or n dimensional
+        visualization
+
+    :param save_dir: The directory to save the plots to
 
     :return: None
 
@@ -33,16 +38,18 @@ def visualize_outliers(data_df, outlier_df, bars=True, diff_colors=True, show=Tr
 
     if num_columns_data == 2:
         visualize_outliers_2d(data_df=data_df, outlier_df=outlier_df, diff_colors=diff_colors,
-                              show=show, save=save, title=title)
+                              show=show, save=save, title=title, save_dir=save_dir)
     else:
         for column in data_df.columns:
             visualize_outliers_1d(data_df=data_df, outlier_df=outlier_df, column=column, bars=bars,
-                                  diff_colors=diff_colors, show=show, save=save, title=title)
+                                  diff_colors=diff_colors, show=show, save=save, title=title,
+                                  multiple_hists=multiple_hists, save_dir=save_dir)
 
     return None
 
 
-def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=True, show=True, save=False, title=""):
+def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=True, show=True, save=False, title="",
+                          multiple_hists=False, save_dir=""):
     """
 
     :param data_df: A DataFrame which holds all of the data we will be detecting outliers in
@@ -56,6 +63,10 @@ def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=Tr
     :param show: A boolean of whether or not to show the plot (primarily used for testing)
     :param save: A boolean of whether or not to save the plot
     :param title: A String title to use for the plot
+    :param multiple_hists: A boolean of whether or not to have multiple histograms for the 1 or n dimensional
+        visualization
+
+    :param save_dir: The directory to save the plots to
 
     :return: None
 
@@ -81,10 +92,46 @@ def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=Tr
         intervals.append(accumulator)
         accumulator = accumulator + interval_increment
 
-    plt.hist(data_df[column].values, bins=intervals, color="green")
     if diff_colors:
-        plt.hist(outlier_df[column].values, bins=intervals, color="red")
+
+        if multiple_hists:
+            fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(10, 10))
+            ax_normal_data = axes[0]
+            ax_outliers = axes[1]
+            ax_combined = axes[2]
+            ax_normal_data.hist(data_df[column].values, bins=intervals, histtype="bar", color="green",
+                                label="Not Outliers")
+            ax_outliers.hist(outlier_df[column].values, bins=intervals, histtype="bar", color="red", label="Outliers")
+            ax_combined.hist(data_df[column].values, bins=intervals, histtype="bar", color="green",
+                             label="Not Outliers")
+            ax_combined.hist(outlier_df[column].values, bins=intervals, histtype="bar", color="red", label="Outliers")
+
+            # Find the largest y limit so all plots have an equal scale
+            largest_y = max(axes[0].get_ylim()[1], axes[1].get_ylim()[1], axes[2].get_ylim()[1])
+            axes[0].set_ylim([0, largest_y])
+            axes[1].set_ylim([0, largest_y])
+            axes[2].set_ylim([0, largest_y])
+
+            axes[0].set_title(str(title) + " - " + str(column) + " - Non Outliers")
+            axes[1].set_title(str(title) + " - " + str(column) + " - Outliers")
+            axes[2].set_title(str(title) + " - " + str(column) + " - Combined Data")
+
+            axes[0].set_ylabel("Data Point Frequency")
+            axes[1].set_ylabel("Data Point Frequency")
+            axes[2].set_ylabel("Data Point Frequency")
+
+            axes[0].set_xlabel("Data Point Value For " + str(column))
+            axes[1].set_xlabel("Data Point Value For " + str(column))
+            axes[2].set_xlabel("Data Point Value For " + str(column))
+
+            pass
+
+        else:
+            plt.hist(data_df[column].values, bins=intervals, histtype="bar", color="green", label="Not Outliers")
+            plt.hist(outlier_df[column].values, bins=intervals, histtype="bar", color="red", label="Outliers")
+        plt.legend()
     else:
+        plt.hist(data_df[column].values, bins=intervals, color="green")
         plt.hist(outlier_df[column].values, bins=intervals, color="green")
 
     if bars:
@@ -92,10 +139,15 @@ def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=Tr
             plt.axvline(max(data_non_outliers))
             plt.axvline(min(data_non_outliers))
 
-    plt.title(str(title) + " - " + str(column))
-    plt.xlabel("Data Point Value For " + str(column))
-    plt.ylabel("Data Point Frequency")
+    if not (multiple_hists and diff_colors):
+        plt.title(str(title) + " - " + str(column))
+        plt.xlabel("Data Point Value For " + str(column))
+        plt.ylabel("Data Point Frequency")
 
+    plt.tight_layout()
+
+    if save:
+        plt.savefig(save_dir + str(title) + " - " + str(column))
     if show:
         plt.show()
     else:
@@ -104,7 +156,7 @@ def visualize_outliers_1d(data_df, outlier_df, column, bars=True, diff_colors=Tr
     return None
 
 
-def visualize_outliers_2d(data_df, outlier_df, diff_colors=True, show=True, save=False, title=""):
+def visualize_outliers_2d(data_df, outlier_df, diff_colors=True, show=True, save=False, title="", save_dir=""):
     """
 
     :param data_df: A DataFrame which holds all of the data we will be detecting outliers in
@@ -115,6 +167,8 @@ def visualize_outliers_2d(data_df, outlier_df, diff_colors=True, show=True, save
     :param show: A boolean of whether or not to show the plot (primarily used for testing)
     :param save: A boolean of whether or not to save the plot
     :param title: A String title to use for the plot
+
+    :param save_dir: The directory to save the plots to
 
     :return: None
 
@@ -133,15 +187,20 @@ def visualize_outliers_2d(data_df, outlier_df, diff_colors=True, show=True, save
 
     data_cols = data_df.columns
 
-    plt.scatter(data_df[data_cols[0]].values, data_df[data_cols[1]], color="green")
     if diff_colors:
-        plt.scatter(outlier_df[data_cols[0]].values, outlier_df[data_cols[1]], color="green")
+        plt.scatter(data_df[data_cols[0]].values, data_df[data_cols[1]], color="green", label="Not Outliers")
+        plt.scatter(outlier_df[data_cols[0]].values, outlier_df[data_cols[1]], color="red", label="Outliers")
     else:
-        plt.scatter(outlier_df[data_cols[0]].values, outlier_df[data_cols[1]], color="red")
+        plt.scatter(data_df[data_cols[0]].values, data_df[data_cols[1]], color="green")
+        plt.scatter(outlier_df[data_cols[0]].values, outlier_df[data_cols[1]], color="green")
     plt.title(title)
     plt.xlabel("Data Point Value For " + str(data_cols[0]))
     plt.ylabel("Data Point Value For " + str(data_cols[1]))
 
+    plt.tight_layout()
+
+    if save:
+        plt.savefig(save_dir + str(title))
     if show:
         plt.show()
     else:
@@ -150,7 +209,7 @@ def visualize_outliers_2d(data_df, outlier_df, diff_colors=True, show=True, save
     return None
 
 
-def visualize_outliers_grid(data_df, outlier_df, x_df, y_df, bars=True, diff_colors=True):
+def visualize_outliers_grid(data_df, outlier_df, x_df, y_df, bars=True, diff_colors=True, save_dir=""):
     """
 
     :param data_df: A DataFrame which holds all of the data we will be detecting outliers in
@@ -159,6 +218,8 @@ def visualize_outliers_grid(data_df, outlier_df, x_df, y_df, bars=True, diff_col
         highlight outliers
 
     :param diff_colors: A boolean which is whether or not we will use different colors to represent outliers
+
+    :param save_dir: The directory to save the plots to
 
     :return: None
 

@@ -1,0 +1,1 @@
+This folder is meant to mimic the Temp folder that will be located on the server

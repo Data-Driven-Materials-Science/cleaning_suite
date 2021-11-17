@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# Image folder for examples made from the suite
+Example_Visualizations/

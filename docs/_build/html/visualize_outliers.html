@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Testing Files" href="testing.html" />
     <link rel="prev" title="visualize_nulls.py" href="visualize_nulls.html" /> 
 </head>
 
@@ -85,6 +86,8 @@
 <li class="toctree-l2"><a class="reference internal" href="duplicate_handlers.html">Duplicate Handler Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="null_handlers.html">Null Handler Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="outlier_handlers.html">Outlier Handler Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocessing_handlers.html">Preprocessing Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recommender_files.html">Recommender Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="report_generators.html">Report Generator Files</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="visualization.html">Visualization Files</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="visualize_nulls.html">visualize_nulls.py</a></li>
@@ -93,6 +96,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing Files</a></li>
 </ul>
 
             
@@ -165,7 +169,7 @@
 <span id="visualize-outliers-py"></span><h1>visualize_outliers.py<a class="headerlink" href="#module-visualize_outliers" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="visualize_outliers.visualize_outliers">
-<code class="sig-prename descclassname">visualize_outliers.</code><code class="sig-name descname">visualize_outliers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">outlier_df</span></em>, <em class="sig-param"><span class="n">bars</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">diff_colors</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize_outliers.visualize_outliers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">visualize_outliers.</code><code class="sig-name descname">visualize_outliers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">outlier_df</span></em>, <em class="sig-param"><span class="n">bars</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">diff_colors</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">show</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">save</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize_outliers.visualize_outliers" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -174,6 +178,54 @@
 <li><p><strong>bars</strong> – A boolean which determines whether or not we will use bars on either side of the data to
 highlight outliers</p></li>
 <li><p><strong>diff_colors</strong> – A boolean which is whether or not we will use different colors to represent outliers</p></li>
+<li><p><strong>show</strong> – A boolean of whether or not to show the plot (primarily used for testing)</p></li>
+<li><p><strong>save</strong> – A boolean of whether or not to save the plot</p></li>
+<li><p><strong>title</strong> – A String title to use for the plot</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Visualizes the outliers.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="visualize_outliers.visualize_outliers_1d">
+<code class="sig-prename descclassname">visualize_outliers.</code><code class="sig-name descname">visualize_outliers_1d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">outlier_df</span></em>, <em class="sig-param"><span class="n">column</span></em>, <em class="sig-param"><span class="n">bars</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">diff_colors</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">show</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">save</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize_outliers.visualize_outliers_1d" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_df</strong> – A DataFrame which holds all of the data we will be detecting outliers in</p></li>
+<li><p><strong>outlier_df</strong> – A DataFrame which holds all of the outliers that have been separated from the main data set</p></li>
+<li><p><strong>column</strong> – The DataFrame column we are visualizing</p></li>
+<li><p><strong>bars</strong> – A boolean which determines whether or not we will use bars on either side of the data to
+highlight outliers</p></li>
+<li><p><strong>diff_colors</strong> – A boolean which is whether or not we will use different colors to represent outliers</p></li>
+<li><p><strong>show</strong> – A boolean of whether or not to show the plot (primarily used for testing)</p></li>
+<li><p><strong>save</strong> – A boolean of whether or not to save the plot</p></li>
+<li><p><strong>title</strong> – A String title to use for the plot</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Visualizes the outliers.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="visualize_outliers.visualize_outliers_2d">
+<code class="sig-prename descclassname">visualize_outliers.</code><code class="sig-name descname">visualize_outliers_2d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_df</span></em>, <em class="sig-param"><span class="n">outlier_df</span></em>, <em class="sig-param"><span class="n">diff_colors</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">show</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">save</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#visualize_outliers.visualize_outliers_2d" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_df</strong> – A DataFrame which holds all of the data we will be detecting outliers in</p></li>
+<li><p><strong>outlier_df</strong> – A DataFrame which holds all of the outliers that have been separated from the main data set</p></li>
+<li><p><strong>diff_colors</strong> – A boolean which is whether or not we will use different colors to represent outliers</p></li>
+<li><p><strong>show</strong> – A boolean of whether or not to show the plot (primarily used for testing)</p></li>
+<li><p><strong>save</strong> – A boolean of whether or not to save the plot</p></li>
+<li><p><strong>title</strong> – A String title to use for the plot</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -212,6 +264,8 @@ highlight outliers</p></li>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="testing.html" class="btn btn-neutral float-right" title="Testing Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="visualize_nulls.html" class="btn btn-neutral float-left" title="visualize_nulls.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

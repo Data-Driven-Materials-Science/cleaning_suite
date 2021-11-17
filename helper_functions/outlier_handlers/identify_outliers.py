@@ -1,14 +1,13 @@
-import pandas as pd
 import numpy as np
 from scipy.stats import iqr
+import pandas as pd
 from sklearn.cluster import DBSCAN
 from sklearn.neighbors import NearestNeighbors
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import IsolationForest
 
-
-# import matplotlib.pyplot as plt
-
-
-def return_outliers(data_df, method_details={"method_name": "z-score", "z_value": 3, "is_univariate": True}):
+def return_outliers(data_df, method_details={"method_name": "z-score", "z_value": 3, "is_univariate": True,
+                                             "time_series": False}):
     """
     :param data_df: A DataFrame which holds all of the data we will be detecting outliers in
     :param method_details: A dictionary of the details of the outlier detection method we are using. Contains
@@ -22,29 +21,22 @@ def return_outliers(data_df, method_details={"method_name": "z-score", "z_value"
     """
 
     try:
-        if method_details["method_name"] == "dbscan":
-            return dbscan_method(data_df=data_df, method_details=method_details)
-        elif method_details["method_name"] == "knn":
-            return k_nearest_neighbors_method(data_df=data_df, method_details=method_details)
-        if method_details["is_univariate"]:
-            if method_details["method_name"] == "z-score":
-                return z_score_method(data_df=data_df, method_details=method_details)
-            if method_details["method_name"] == "boxplot":
-                return boxplot_method(data_df=data_df, method_details=method_details)
+        if method_details["time_series"]:
+            if method_details["method_name"] == "isolation_forest":
+                return isolation_forest_method(data_df=data_df, method_details=method_details)
+        else:
+            if method_details["method_name"] == "dbscan":
+                return dbscan_method(data_df=data_df, method_details=method_details)
+            elif method_details["method_name"] == "knn":
+                return k_nearest_neighbors_method(data_df=data_df, method_details=method_details)
+            if method_details["is_univariate"]:
+                if method_details["method_name"] == "z-score":
+                    return z_score_method(data_df=data_df, method_details=method_details)
+                if method_details["method_name"] == "boxplot":
+                    return boxplot_method(data_df=data_df, method_details=method_details)
     except KeyError:
         print("You have the wrong method details!")
         return -1
-
-    # # TODO parameters will include data properties that determine optimal outlier detection technique
-    # # TODO pass in a dictionary, multivariate or univariate, distribution
-    #
-    # # TODO if statement that changes if it is multivariate or univariate
-    #
-    # # TODO For every column in the DataFrame we are going to try to correct the outliers inside of it
-    # for col in []:
-    #     # TODO Switch case based on methods that will be below this
-    #
-    #     break
 
     return None
 
@@ -54,7 +46,7 @@ def z_score_method(data_df, method_details):
     
     :param data_df: The DataFrame which contains the one dimensional, univariate data
     :param method_details: The details we are using for this outlier detection method. The parameter 'z_value'
-    determines which z value to use for this method.
+        determines which z value to use for this method.
 
     :return: Two DataFrames, the first with non outlier values and the second containing all outlier values
     
@@ -96,10 +88,7 @@ def boxplot_method(data_df, method_details):
 
     outlier_type = method_details["outlier_type"]
 
-    z_value = None
-
-    # The extra 0.5 is added to allow us to treat this exactly the same as the z-score method for how the values are
-    # returned
+    # 0.5 is added to allow us to treat this exactly the same as the z-score method for how the values are returned
 
     if outlier_type == "mild":
         z_value = 1.5 + 0.5
@@ -125,8 +114,8 @@ def dbscan_method(data_df, method_details):
 
     :param data_df: The DataFrame which contains the n dimensional, univariate or multivariate data
     :param method_details: The details we are using for this outlier detection method DBSCAN was taken from
-    sklearn's library at https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html.
-    Parameters 'eps', 'min_samples', and 'algorithm' are used.
+        sklearn's library at https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html.
+        Parameters 'eps', 'min_samples', and 'algorithm' are used.
 
 
     :return: Two DataFrames, the first with non outlier values and the second containing all outlier values.
@@ -162,9 +151,6 @@ def dbscan_method(data_df, method_details):
     outlier_df = outlier_df.drop(columns=["DBSCAN_Results"])
     non_outliers_df = non_outliers_df.drop(columns=["DBSCAN_Results"])
 
-    # print(outlier_df)
-    # print(non_outliers_df)
-    #
     return non_outliers_df, outlier_df
 
 
@@ -175,13 +161,13 @@ def k_nearest_neighbors_method(data_df, method_details):
     :param method_details: The details we are using for this outlier detection method
 
     :return: Two DataFrames, the first with non outlier values and the second containing all outlier values. The
-    parameter 'cutoff' is used to determine what cutoff to use for a distance value needed for a point to not be
-    considered an outlier.
+        parameter 'cutoff' is used to determine what cutoff to use for a distance value needed for a point to not be
+        considered an outlier.
 
     This method determines which values are outliers according to the k-NN outlier detection method. Once this
     is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
     original data can then be rebuilt as the index is preserved for the non outliers and outlier data points.
-    This method is taken from sklean's neighbors module at https://scikit-learn.org/stable/modules/neighbors.html.
+    This method is taken from sklearn's neighbors module at https://scikit-learn.org/stable/modules/neighbors.html.
 
     """
     assert method_details["cut_off"] is not None
@@ -190,32 +176,63 @@ def k_nearest_neighbors_method(data_df, method_details):
 
     raw_values = data_df.values
 
-    # print(raw_values)
-
     nearest_neighbors_model = NearestNeighbors(n_neighbors=3)
 
     nearest_neighbors_model.fit(raw_values)
 
-    # distances and indexes of k-neaighbors from model outputs
+    # A list of the distance values along with the indexes
     distance_values, index_values = nearest_neighbors_model.kneighbors(raw_values)
-    # # plot mean of k-distances of each observation
-    # plt.plot(distance_values.mean(axis=1))
-    # plt.show()
 
-    # visually determine cutoff values > 0.15
+    # All values with a distance value above the cutoff are deemed outliers
     outlier_index = np.where(distance_values.mean(axis=1) > cut_off_val)
-    # print(outlier_index[0])
 
-    # filter outlier values
+    # Mark the outlier values and the non outlier values
     outlier_index_values = data_df.index.isin(outlier_index[0])
     non_outlier_df = data_df[~outlier_index_values]
     outlier_df = data_df[outlier_index_values]
-    # print(outlier_values)
-
-    # plot data
-    # plt.scatter(df["sepal_length"], df["sepal_width"], color="b", s=65)
-    # plot outlier values
-    # plt.scatter(outlier_values["sepal_length"], outlier_values["sepal_width"], color="r")
-    # plt.show()
 
     return non_outlier_df, outlier_df
+
+
+def isolation_forest_method(data_df, method_details):
+    """
+
+    :param data_df: The DataFrame which contains the n dimensional, univariate or multivariate data
+    :param method_details: The details we are using for this outlier detection method
+
+    :return: Two DataFrames, the first with non outlier values and the second containing all outlier values. The
+        parameter 'cutoff' is used to determine what cutoff to use for a distance value needed for a point to not be
+        considered an outlier.
+
+    This method determines which values are outliers according to the k-NN outlier detection method. Once this
+    is done, it will return the data points which are not outliers and the outliers in two separate DataFrames. The
+    original data can then be rebuilt as the index is preserved for the non outliers and outlier data points.
+    This method is taken from sklearn's ensemble module at
+    https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html
+
+    """
+    num_points = len(data_df.index)
+    data_df_copy = data_df.copy()
+
+    resulting_data_set = data_df_copy.values
+
+    # Generate the necessary class
+    scaler = StandardScaler()
+    np_scaled = scaler.fit_transform(resulting_data_set.reshape(-1, len(data_df_copy.columns)))
+    data = pd.DataFrame(np_scaled)
+    # Train the isolation forest model
+    if "random_state" in method_details.keys():
+        model = IsolationForest(random_state=method_details["random_state"])
+    else:
+        model = IsolationForest()
+    model.fit(data)
+
+    data_df_copy["anomaly"] = model.predict(data)
+    data_df_copy["Total"] = [False for i in range(num_points)]
+
+    a = data_df_copy.loc[data_df_copy["anomaly"] == -1, ["Total"]]
+
+    resulting_non_outliers_df = data_df.loc[data_df_copy.index.difference(a.index)]
+    resulting_outliers_df = data_df.loc[a.index]
+
+    return resulting_non_outliers_df, resulting_outliers_df
