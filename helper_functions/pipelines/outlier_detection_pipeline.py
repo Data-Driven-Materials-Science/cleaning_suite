@@ -51,10 +51,10 @@ def run_pipeline(user_id, temp_dir_path="Temp/", time_series=False):
 
     normal_data_df, outliers_df = identify_outliers.return_outliers(data_df=data_df, method_details=method_details)
 
-    PFM.save_outliers_and_normal_data(directory_path=dir_path + "additional_files/", data_df=data_df,
+    PFM.save_outliers_and_normal_data(directory_path=dir_path + "additional_files/", data_df=normal_data_df,
                                       outlier_df=outliers_df)
 
-    visualize_outliers.visualize_outliers(data_df=data_df, outlier_df=outliers_df, bars=True, diff_colors=True,
+    visualize_outliers.visualize_outliers(data_df=normal_data_df, outlier_df=outliers_df, bars=True, diff_colors=True,
                                           show=True, save=True, title="Testing123", multiple_hists=True,
                                           save_dir=image_save_dir)
 

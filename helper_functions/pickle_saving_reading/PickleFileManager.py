@@ -1,7 +1,7 @@
 import pandas as pd
 
-OUTLIER_FILE_NAME = "non_outlier_data.pkl"
-EXPECTED_DATA_FILE_NAME = "outlier_data.pkl"
+EXPECTED_DATA_FILE_NAME = "non_outlier_data.pkl"
+OUTLIER_DATA_FILE_NAME = "outlier_data.pkl"
 
 
 def save_outliers_and_normal_data(directory_path, data_df, outlier_df):
@@ -13,8 +13,8 @@ def save_outliers_and_normal_data(directory_path, data_df, outlier_df):
     :return:
     """
 
-    data_df.to_pickle(directory_path + "/" + OUTLIER_FILE_NAME)
-    outlier_df.to_pickle(directory_path + "/" + EXPECTED_DATA_FILE_NAME)
+    data_df.to_pickle(directory_path + "/" + EXPECTED_DATA_FILE_NAME)
+    outlier_df.to_pickle(directory_path + "/" + OUTLIER_DATA_FILE_NAME)
 
     return True
 
@@ -26,7 +26,7 @@ def read_outliers_and_normal_data(directory_path):
     :return: The two DataFrames in the order of the expected data DataFrame and then the outlier DataFrame
     """
 
-    data_df = pd.read_pickle(directory_path + "/" + OUTLIER_FILE_NAME)
-    outlier_df = pd.read_pickle(directory_path + "/" + EXPECTED_DATA_FILE_NAME)
+    data_df = pd.read_pickle(directory_path + "/" + EXPECTED_DATA_FILE_NAME)
+    outlier_df = pd.read_pickle(directory_path + "/" + OUTLIER_DATA_FILE_NAME)
 
     return data_df, outlier_df
