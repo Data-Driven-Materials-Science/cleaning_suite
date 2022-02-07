@@ -52,48 +52,70 @@ def visualize_nulls_grid(data_df, x_df, y_df):
 
 
 def visualize_nulls_general(data, image_directory="Images/"):
-    fig = generate_nulls_bar_graph(data)
-    plt.savefig(image_directory + "Bar_graph_nulls")
-    plt.close()
+    fig = generate_nulls_bar_graph(data, image_directory)
+    
     fig = generate_nulls_matrix(data)
+    plt.title("Locations of Null Values in Each Record", fontsize=30)
+    plt.xlabel("Column", fontsize=20)
+    plt.ylabel("Record", fontsize=20)
     plt.savefig(image_directory + "Matrix_nulls")
     plt.close()
+    
     fig = generate_nulls_correlation_matrix(data)
+    plt.title("Null Value Correlation Between Pairs of Columns", fontsize=30)
+    plt.xlabel("Column 1", fontsize=20)
+    plt.ylabel("Column 2", fontsize=20)
     plt.savefig(image_directory + "Correlation_matrix_nulls")
     plt.close()
+    
     fig = generate_nulls_dendrogram(data)
+    plt.title("Null Value Correlations Between All Columns", fontsize=30)
+    plt.xlabel("Column", fontsize=20)
+    plt.ylabel("Null Column Similarity", fontsize=20)
     plt.savefig(image_directory + "Dendrogram_nulls")
     plt.close()
 
 
-def generate_nulls_bar_graph(data, color='dimgray', filter=None, n=0, p=0, sort=None):
+def generate_nulls_bar_graph(data, image_directory):
     # n and p are only applicable when filter!=None
 
     '''
-    Use of params:
-    - color: YES
-    - sort: YES
-    - orientation: eh, maybe
-    - log: probably not useful
-    - filter: only useful if there are a TON of columns
-    - Actually, filter could be used to grab the 10 most null columns if we wanted to
-    - n,p: only useful if filter is used
+    We don't use the missingno library here because this method
+    doesn't allow us to add labels to the visuals.
     '''
     # if sort == None:
     # return missingno.bar(data, color=color, filter=filter, n=n, p=p)
-    return missingno.bar(data, sort=sort, color=color, filter=filter, n=n, p=p)
+    null_values = data.isna().sum().values
+    columns = data.columns
+
+    if len(columns) <= 50:
+        plt.figure(figsize=(25, 10))
+        plt.bar(columns, null_values, color='dimgray')
+    else:
+        plt.figure(figsize=(25, (25 + len(columns) - 50) * 0.5))
+        plt.barh(columns, null_values, color='dimgray')
+        
+    xlocs, _ = plt.xticks(fontsize=15, rotation=45)
+    for i, v in enumerate(null_values):
+        plt.text(xlocs[i], v, str(v), fontsize=15, verticalalignment='bottom', horizontalalignment='center')
+        
+    plt.title("Total Number of Nulls in Each Column", fontsize=30)
+    plt.xlabel("Column", fontsize=20)
+    plt.ylabel("Number of Null Values", fontsize=20)
+    plt.savefig(image_directory + "Bar_graph_nulls")
+    plt.close()
 
 
 def generate_nulls_matrix(data, filter=None, n=0, p=0, sort=None, figsize=(25, 10), fontsize=16,
                           color=(0.25, 0.25, 0.25)):
     # if sort == None:
     # return missingno.matrix(data, filter=filter, p=p, n=n, color=color, figsize=figsize, fontsize=fontsize)
-    return missingno.matrix(data, filter=filter, p=p, n=n, color=color, sort=sort, figsize=figsize, fontsize=fontsize)
+    return missingno.matrix(data, filter=filter, p=p, n=n, color=color, sort=sort, figsize=figsize, fontsize=fontsize, labels=True)
 
 
 def generate_nulls_correlation_matrix(data, filter=None, n=0, p=0, sort=None, figsize=(20, 12), fontsize=16,
                                       cmap='RdBu'):
-    return missingno.heatmap(data, filter=filter, n=n, p=p, sort=sort, cmap=cmap, figsize=figsize, fontsize=fontsize)
+    return missingno.heatmap(data, filter=filter, n=n, p=p, sort=sort, cmap=cmap, figsize=figsize, fontsize=fontsize, labels=True)
 
 
 def generate_nulls_dendrogram(data, method='average', filter=None, n=0, p=0):
