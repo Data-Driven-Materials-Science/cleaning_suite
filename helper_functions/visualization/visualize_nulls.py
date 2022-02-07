@@ -102,7 +102,9 @@ def generate_nulls_bar_graph(data, image_directory):
     plt.title("Total Number of Nulls in Each Column", fontsize=30)
     plt.xlabel("Column", fontsize=20)
     plt.ylabel("Number of Null Values", fontsize=20)
-    plt.savefig(image_directory + "Bar_graph_nulls")
+    
+    if(image_directory != None):
+        plt.savefig(image_directory + "Bar_graph_nulls")
     plt.close()
 
 
