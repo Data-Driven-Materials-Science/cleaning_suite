@@ -34,7 +34,7 @@ def test_bar_graph_null_values(show=False):
     for s in sort:
         for col in color:
             for f, n_val, p_val in zip(filters, n, p):
-                fig = visualize_nulls.generate_nulls_bar_graph(test_data_set, color=col, filter=f, n=n_val, p=p_val, sort=s)
+                fig = visualize_nulls.generate_nulls_bar_graph(test_data_set, None)
                 if show:
                     plt.show()
                     plt.close()
